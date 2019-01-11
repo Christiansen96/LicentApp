@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "22559028645",
+    "firebase_url": "https://licentapp-1547211394435.firebaseio.com",
+    "project_id": "licentapp-1547211394435",
+    "storage_bucket": "licentapp-1547211394435.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22559028645:android:580ff4a0c45afea3",
+        "android_client_info": {
+          "package_name": "com.example.retea.licentapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22559028645-8kargehlbjmt7mfli3680s068fen4is8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGCvrGmBBh5UTeLk8FRGK6nY6YxmnoJxM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": [4]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Header"
+        />
+
+    <!-- Note: We use a reverse DNS naming style
+          ie: fragment (layout type)
+              + embedded_map_view (name)
+              + (optional view name if only one)
+              + mapview (view object type) -->
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/fragment_embedded_map_view_mapview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Footer" />
+
+</LinearLayout>
