@@ -1,10 +1,13 @@
 package com.example.retea.licentapp.activities;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -16,8 +19,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.retea.licentapp.R;
+import com.example.retea.licentapp.models.GeologicalPosition;
+import com.example.retea.licentapp.utils.Utils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import static com.example.retea.licentapp.utils.Constants.ERROR_DIALOG_REQUEST;
 import static com.example.retea.licentapp.utils.Constants.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
@@ -27,28 +36,67 @@ public class StartActivity extends AppCompatActivity {
     private static final String TAG = "StartActivity";
 
     private boolean mLocationPermissionGranted = false;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationManager mLocationManager;
+    private LocationListener mLocationListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+    }
+
+
+
+    private void getLastKnownLocation() {
+        Log.d(TAG, "getLastKnownLocation: called");
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                if (task.isSuccessful()) {
+                    Location location = task.getResult();
+                    if (location != null) {
+
+                        GeologicalPosition geoPos = new GeologicalPosition(location.getLatitude(), location.getLongitude());
+                        Log.d(TAG, "onComplete: latitude: " + geoPos.getLatitude());
+                        Log.d(TAG, "onComplete: longitude:" + geoPos.getLongitude());
+
+                    } else {
+                        Log.d(TAG, "onComplete: LOCATION NULL");
+
+                    }
+
+                }
+
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(checkMapServices()){
-            if(mLocationPermissionGranted){
+        if (checkMapServices()) {
+            if (mLocationPermissionGranted) {
+                getLastKnownLocation();
+                startActivity(new Intent(StartActivity.this,DashboardActivity.class));
                 //fa ce trebuie
-            }else{
+            } else {
                 getLocationPermission();
             }
         }
     }
 
-    private boolean checkMapServices(){
-        if(isServicesOK()){
-            if(isMapsEnabled()){
+    private boolean checkMapServices() {
+        if (isServicesOK()) {
+            if (isMapsEnabled()) {
                 return true;
             }
         }
@@ -69,10 +117,10 @@ public class StartActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public boolean isMapsEnabled(){
-        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+    public boolean isMapsEnabled() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
             return false;
         }
@@ -89,6 +137,8 @@ public class StartActivity extends AppCompatActivity {
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
+            getLastKnownLocation();
+            startActivity(new Intent(StartActivity.this,DashboardActivity.class));
             //continua aplicatia as intended
         } else {
             ActivityCompat.requestPermissions(this,
@@ -97,22 +147,21 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    public boolean isServicesOK(){
+    public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
 
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(StartActivity.this);
 
-        if(available == ConnectionResult.SUCCESS){
+        if (available == ConnectionResult.SUCCESS) {
             //everything is fine and the user can make map requests
             Log.d(TAG, "isServicesOK: Google Play Services is working");
             return true;
-        }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
             //an error occured but we can resolve it
             Log.d(TAG, "isServicesOK: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(StartActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
-        }else{
+        } else {
             Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -140,17 +189,17 @@ public class StartActivity extends AppCompatActivity {
         Log.d(TAG, "onActivityResult: called.");
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
-                if(mLocationPermissionGranted){
+                if (mLocationPermissionGranted) {
+                    getLastKnownLocation();
+                    startActivity(new Intent(StartActivity.this,DashboardActivity.class));
                     //continua aplicatia as intended
-                }
-                else{
+                } else {
                     getLocationPermission();
                 }
             }
         }
 
     }
-
 
 
 }
