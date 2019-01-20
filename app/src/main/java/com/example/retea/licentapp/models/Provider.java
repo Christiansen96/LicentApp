@@ -8,14 +8,16 @@ public class Provider {
 
     private int id;
     private String name;
-    private GeologicalPosition location;
+    private String category;
+    private GeologicalPosition geologicalPosition;
     private List<Service> serviceList;
-    private byte[] image;
+    private int image;
 
-    public Provider(int id, String name, GeologicalPosition location, List<Service> serviceList, byte[] image) {
+    public Provider(int id, String name,String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int image) {
         this.id = id;
         this.name = name;
-        this.location = location;
+        this.category = category;
+        this.geologicalPosition = geologicalPosition;
         this.serviceList = serviceList;
         this.image = image;
     }
@@ -36,12 +38,12 @@ public class Provider {
         this.name = name;
     }
 
-    public GeologicalPosition getLocation() {
-        return location;
+    public GeologicalPosition getProviderGeologicalPosition() {
+        return geologicalPosition;
     }
 
-    public void setLocation(GeologicalPosition location) {
-        this.location = location;
+    public void setProviderGeologicalPosition(GeologicalPosition location) {
+        this.geologicalPosition = location;
     }
 
     public List<Service> getServiceList() {
@@ -52,11 +54,19 @@ public class Provider {
         this.serviceList = serviceList;
     }
 
-    public byte[] getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
