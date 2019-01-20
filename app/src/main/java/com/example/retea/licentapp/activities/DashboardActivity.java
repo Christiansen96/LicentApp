@@ -1,30 +1,53 @@
 package com.example.retea.licentapp.activities;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
+import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
 import com.example.retea.licentapp.models.GeologicalPosition;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity {
-
     private static final String TAG = "DashboardActivity";
 
+    private TextView AddressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        Log.d(TAG, "onCreate: entered");
+        AddressTextView = findViewById(R.id.AddressTextViewId);
+        getDeviceAddress();
+
+    }
+
+    private void getDeviceAddress() {
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+//            List<Address> addressList = geocoder.getFromLocation(LicentApplication.getInstance().getDeviceGeologicalPosition().getLatitude(),
+//                    LicentApplication.getInstance().getDeviceGeologicalPosition().getLongitude(), 1);
+            List<Address> addressList = geocoder.getFromLocation(44.4628556,
+                    26.1310713, 1);
+            Log.d(TAG, "getDeviceAddress: list size is " + addressList.size());
+            String address = addressList.get(0).getAddressLine(0);
+            Log.d(TAG, "getDeviceAddress: " + address);
+            AddressTextView.setText(address);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 

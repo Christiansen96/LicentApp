@@ -10,6 +10,9 @@ public class GeologicalPosition {
         this.latitude = latitude;
     }
 
+    public GeologicalPosition() {
+    }
+
     public double getLongitude() {
         return longitude;
     }
