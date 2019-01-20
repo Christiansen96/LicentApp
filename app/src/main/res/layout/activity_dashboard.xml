@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DashboardActivity">
+    tools:context=".activities.DashboardActivity"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/AddressTextViewId"
@@ -12,5 +13,20 @@
         android:layout_height="wrap_content"
         android:text="text"
         android:textSize="40sp"/>
+    <Button
+        android:id="@+id/FavouritesButtonId"
+        android:text="Favourites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/NearbyButtonId"
+        android:text="Nearby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/SearchButtonId"
+        android:text="Search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
