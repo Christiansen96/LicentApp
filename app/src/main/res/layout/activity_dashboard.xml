@@ -4,29 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DashboardActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activities.DashboardActivity">
+
+    <TextView
+        android:id="@+id/servicesNearId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="Services near"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/AddressTextViewId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="text"
-        android:textSize="40sp"/>
-    <Button
-        android:id="@+id/FavouritesButtonId"
-        android:text="Favourites"
+        android:layout_gravity="center"
+        android:text="Str. Doamna Ghica 6"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:id="@+id/HomeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/NearbyButtonId"
-        android:text="Nearby"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:orientation="horizontal"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/HomeImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_home_black_24dp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/common_google_signin_btn_text_dark_disabled"
+            android:elevation="10dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Home"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Need an appointment for a service at their location?"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/AwayLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/SearchButtonId"
-        android:text="Search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/AwayImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_directions_run_black_24dp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/common_google_signin_btn_text_dark_disabled"
+            android:elevation="10dp"></View>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Away"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Need an appointment for a service at their location?"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

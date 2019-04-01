@@ -1,5 +1,6 @@
 package com.example.retea.licentapp.activities;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.retea.licentapp.LicentApplication;
@@ -21,9 +23,8 @@ public class DashboardActivity extends AppCompatActivity {
     private static final String TAG = "DashboardActivity";
 
     private TextView AddressTextView;
-    private Button FavouritesButton;
-    private Button NearbyButton;
-    private Button SearchButton;
+    private LinearLayout HomeLayout;
+    private LinearLayout AwayLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +33,21 @@ public class DashboardActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: entered");
 
         AddressTextView = findViewById(R.id.AddressTextViewId);
-        FavouritesButton = findViewById(R.id.FavouritesButtonId);
-        NearbyButton = findViewById(R.id.NearbyButtonId);
-        SearchButton = findViewById(R.id.SearchButtonId);
+        HomeLayout = findViewById(R.id.HomeLayout);
+        AwayLayout = findViewById(R.id.AwayLayout);
 
         getDeviceAddress();
 
-        FavouritesButton.setOnClickListener(new View.OnClickListener() {
+        HomeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(DashboardActivity.this,MainActivity.class));
+            }
+        });
+        AwayLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashboardActivity.this,MainActivity.class));
             }
         });
 
