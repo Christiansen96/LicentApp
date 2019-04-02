@@ -1,6 +1,7 @@
 package com.example.retea.licentapp.fragments;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,14 +12,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
+import com.example.retea.licentapp.models.GeologicalPosition;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 public class NearbyFragment extends Fragment implements OnMapReadyCallback {
 
     private static final String TAG = "NearbyFragment";
+
+    protected MapView mMapView;
+    private GoogleMap mGoogleMap;
+    private LatLngBounds mMapBoundary;
+    private GeologicalPosition mGeologicalPosition;
 
     @Nullable
     @Override
@@ -30,7 +42,6 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
-    protected MapView mMapView;
 
     @Override
     public void onResume() {
@@ -85,6 +96,25 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback {
             return;
         }
         map.setMyLocationEnabled(true);
+        mGoogleMap = map;
+
+       setCameraView(LicentApplication.getDeviceGeologicalPosition());
+
+
+
+    }
+
+    private void setCameraView(GeologicalPosition geologicalPosition){
+
+        double bottomBoundary = geologicalPosition.getLatitude()- .002;
+        double leftBoundary = geologicalPosition.getLongitude() - .002;
+        double topBoundary = geologicalPosition.getLatitude() + .002;
+        double rightBoundary = geologicalPosition.getLongitude() + .002;
+        mMapBoundary = new LatLngBounds(new LatLng(bottomBoundary,leftBoundary),new LatLng(topBoundary,rightBoundary));
+
+        Log.d(TAG, "moveCamera: moving camera to: lat:" + geologicalPosition.getLatitude() + ", lng: " + geologicalPosition.getLongitude());
+        LatLng latLng = new LatLng(geologicalPosition.getLatitude(),geologicalPosition.getLongitude());
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(mMapBoundary,0));
 
     }
 

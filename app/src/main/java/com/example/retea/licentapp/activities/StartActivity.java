@@ -37,21 +37,42 @@ public class StartActivity extends AppCompatActivity {
     private static final String TAG = "StartActivity";
 
     private boolean mLocationPermissionGranted = false;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+    protected void onResume() {
+        super.onResume();
+
+
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
                 startActivity(new Intent(this,DashboardActivity.class));
-                onDestroy();
+//                onDestroy();
                 //ceva
             } else {
                 getLocationPermission();
             }
         }
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_start);
+//        if (checkMapServices()) {
+//            if (mLocationPermissionGranted) {
+//                getDeviceLocation();
+//                startActivity(new Intent(this,DashboardActivity.class));
+//                onDestroy();
+//                //ceva
+//            } else {
+//                getLocationPermission();
+//            }
+//        }
+
+
 
 
     }
@@ -63,13 +84,15 @@ public class StartActivity extends AppCompatActivity {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
                 startActivity(new Intent(this,DashboardActivity.class));
-                onDestroy();
+//                onDestroy();
                 //ceva
             } else {
                 getLocationPermission();
             }
         }
     }
+
+
 
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: called ");
@@ -138,7 +161,7 @@ public class StartActivity extends AppCompatActivity {
             mLocationPermissionGranted = true;
             getDeviceLocation();
             startActivity(new Intent(this,DashboardActivity.class));
-            onDestroy();
+//            onDestroy();
             //ceva
         } else {
             ActivityCompat.requestPermissions(this,
@@ -193,7 +216,7 @@ public class StartActivity extends AppCompatActivity {
                 if(mLocationPermissionGranted){
                     getDeviceLocation();
                     startActivity(new Intent(this,DashboardActivity.class));
-                    onDestroy();
+//                    onDestroy();
                     //ceva
                 }
                 else{
