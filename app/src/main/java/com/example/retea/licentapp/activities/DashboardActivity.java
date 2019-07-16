@@ -3,17 +3,14 @@ package com.example.retea.licentapp.activities;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
-import com.example.retea.licentapp.models.GeologicalPosition;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,12 +1,11 @@
 package com.example.retea.licentapp.fragments;
 
 import android.Manifest;
-import android.app.Application;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
 import com.example.retea.licentapp.models.GeologicalPosition;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;

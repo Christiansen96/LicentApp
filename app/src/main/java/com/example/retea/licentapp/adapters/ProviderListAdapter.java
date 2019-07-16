@@ -1,7 +1,7 @@
 package com.example.retea.licentapp.adapters;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +42,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
 
         holder.providerItemName.setText(provider.getName());
         holder.providerItemCategory.setText(provider.getCategory());
-        Picasso.with(LicentApplication.getInstance().getApplicationContext()).load(provider.getImage()).into(holder.providerItemImage);
-
+        Picasso.get().load(provider.getImage()).into(holder.providerItemImage);
         holder.providerItemLinearLaoyout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
