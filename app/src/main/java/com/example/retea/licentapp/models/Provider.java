@@ -69,4 +69,9 @@ public class Provider {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String toString(){
+        return name + " " + category + " " + geologicalPosition.getLatitude() + " " + geologicalPosition.getLongitude();
+    }
 }
+
