@@ -4,6 +4,8 @@ import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -37,8 +39,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.clustering.ClusterManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class NearbyFragment extends Fragment implements OnMapReadyCallback, ProviderListAdapter.OnItemClickListener, View.OnClickListener {
 
@@ -108,17 +112,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
                 Log.d(TAG, "addMapMarkers: location: " + provider.getProviderGeologicalPosition().toString());
                 try {
                     String snippet = "";
-                    if (provider.getCategory().equals("Stomatologie")) {
-                        snippet = "Stomatologie";
-                    } else if (provider.getCategory().equals("Curatenie")) {
-                        snippet = "Curatenie";
-                    } else if (provider.getCategory().equals("Masaj")) {
-                        snippet = "Masaj";
-                    } else if (provider.getCategory().equals("Instalator")) {
-                        snippet = "Instalator";
-                    } else if (provider.getCategory().equals("Mobila")) {
-                        snippet = "Mobila";
-                    }
+                    snippet = getProviderAddress(provider.getProviderGeologicalPosition());
 
 
                     int providerImage = R.drawable.powered_by_google_light; // set the default avatar
@@ -287,5 +281,23 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
             }
 
         }
+    }
+
+    private String getProviderAddress(GeologicalPosition geologicalPosition) {
+
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+        try {
+//            List<Address> addressList = geocoder.getFromLocation(LicentApplication.getInstance().getDeviceGeologicalPosition().getLatitude(),
+//                    LicentApplication.getInstance().getDeviceGeologicalPosition().getLongitude(), 1);
+            List<Address> addressList = geocoder.getFromLocation(geologicalPosition.getLatitude(),
+                    geologicalPosition.getLongitude(), 1);
+            String address = addressList.get(0).getAddressLine(0);
+            Log.d(TAG, "getProviderAddress: " + address);
+            return address;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Pe undeva pe aici";
     }
 }
