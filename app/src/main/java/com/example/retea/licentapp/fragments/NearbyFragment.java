@@ -20,14 +20,17 @@ import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
 import com.example.retea.licentapp.activities.ProviderActivity;
 import com.example.retea.licentapp.adapters.ProviderListAdapter;
+import com.example.retea.licentapp.models.ClusterMarker;
 import com.example.retea.licentapp.models.GeologicalPosition;
 import com.example.retea.licentapp.models.Provider;
+import com.example.retea.licentapp.utils.MyClusterManagerRenderer;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,9 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
     private LatLngBounds mMapBoundary;
     private GeologicalPosition mGeologicalPosition;
     private RecyclerView.LayoutManager layoutManager;
+    private ClusterManager mClusterManager;
+    private MyClusterManagerRenderer mClusterManagerRenderer;
+    private ArrayList<ClusterMarker> mClusterMarkers;
 
     @Nullable
     @Override
@@ -65,6 +71,68 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
 
 
         return view;
+    }
+
+    private void addMapMarkers(){
+
+        if(mGoogleMap != null){
+
+            if(mClusterManager == null){
+                mClusterManager = new ClusterManager<ClusterMarker>(getActivity().getApplicationContext(), mGoogleMap);
+            }
+            if(mClusterManagerRenderer == null){
+                mClusterManagerRenderer = new MyClusterManagerRenderer(
+                        getActivity(),
+                        mGoogleMap,
+                        mClusterManager
+                );
+                mClusterManager.setRenderer(mClusterManagerRenderer);
+            }
+
+            for(Provider provider: LicentApplication.getProviders()){
+
+                Log.d(TAG, "addMapMarkers: location: " + provider.getProviderGeologicalPosition().toString());
+                try{
+                    String snippet = "";
+                    if(provider.getCategory().equals("Stomatologie")){
+                        snippet = "Stomatologie";
+                    }else if(provider.getCategory().equals("Curatenie")){
+                        snippet = "Curatenie";
+                    }else if(provider.getCategory().equals("Masaj")){
+                        snippet = "Masaj";
+                    } else if(provider.getCategory().equals("Instalator")){
+                        snippet = "Instalator";
+                    } else if(provider.getCategory().equals("Mobila")){
+                        snippet = "Mobila";
+                    }
+
+
+                    int providerImage = R.drawable.powered_by_google_light; // set the default avatar
+                    try{
+                        providerImage = provider.getImage();
+                    }catch (NumberFormatException e){
+                        Log.d(TAG, "addMapMarkers: no avatar for " + provider.getName()+ ", setting default.");
+                    }
+                    ClusterMarker newClusterMarker = new ClusterMarker(
+                            new LatLng(provider.getProviderGeologicalPosition().getLatitude(), provider.getProviderGeologicalPosition().getLongitude()),
+                            provider.getName(),
+                            snippet,
+                            providerImage,
+                            provider
+
+                    );
+                    mClusterManager.addItem(newClusterMarker);
+                    mClusterMarkers.add(newClusterMarker);
+
+                }catch (NullPointerException e){
+                    Log.e(TAG, "addMapMarkers: NullPointerException: " + e.getMessage() );
+                }
+
+            }
+            mClusterManager.cluster();
+
+            setCameraView(LicentApplication.getDeviceGeologicalPosition());
+        }
     }
 
     @Override
@@ -122,7 +190,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
         map.setMyLocationEnabled(true);
         mGoogleMap = map;
 
-       setCameraView(LicentApplication.getDeviceGeologicalPosition());
+        addMapMarkers();
 
 
 
