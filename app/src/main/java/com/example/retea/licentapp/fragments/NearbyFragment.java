@@ -8,6 +8,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -43,15 +44,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-public class NearbyFragment extends Fragment implements OnMapReadyCallback, ProviderListAdapter.OnItemClickListener, View.OnClickListener {
+public class NearbyFragment extends Fragment implements OnMapReadyCallback,
+        ProviderListAdapter.OnItemClickListener,
+        View.OnClickListener,
+        GoogleMap.OnInfoWindowClickListener
+{
 
     private static final String TAG = "NearbyFragment";
     private static final int MAP_LAYOUT_STATE_CONTRACTED = 0;
     private static final int  MAP_LAYOUT_STATE_EXPANDED = 1;
 
 
-    protected MapView mMapView;
+    private MapView mMapView;
     private RelativeLayout mMapContainer;
     private RecyclerView providerListRecyclerView;
 
@@ -59,7 +65,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
     private LatLngBounds mMapBoundary;
     private GeologicalPosition mGeologicalPosition;
     private RecyclerView.LayoutManager layoutManager;
-    private ClusterManager mClusterManager;
+    private ClusterManager<ClusterMarker> mClusterManager;
     private MyClusterManagerRenderer mClusterManagerRenderer;
     private ArrayList<ClusterMarker> mClusterMarkers;
     private int mMapLayoutState = 0;
@@ -67,7 +73,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.nearby_tab_fragment, container, false);
         mMapView = view.findViewById(R.id.fragment_embedded_map_view_mapview);
         mMapView.onCreate(savedInstanceState);
@@ -77,7 +83,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
 
         List<Provider> providers = LicentApplication.getProviders();
 
-        providerListRecyclerView = (RecyclerView) view.findViewById(R.id.ProviderListRecyclerView);
+        providerListRecyclerView = view.findViewById(R.id.ProviderListRecyclerView);
         providerListRecyclerView.setHasFixedSize(true);
 
         ProviderListAdapter providerListAdapter = new ProviderListAdapter(providers, this);
@@ -96,7 +102,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
         if (mGoogleMap != null) {
 
             if (mClusterManager == null) {
-                mClusterManager = new ClusterManager<ClusterMarker>(getActivity().getApplicationContext(), mGoogleMap);
+                mClusterManager = new ClusterManager<ClusterMarker>(Objects.requireNonNull(getActivity()).getApplicationContext(), mGoogleMap);
             }
             if (mClusterManagerRenderer == null) {
                 mClusterManagerRenderer = new MyClusterManagerRenderer(
@@ -111,13 +117,13 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
 
                 Log.d(TAG, "addMapMarkers: location: " + provider.getProviderGeologicalPosition().toString());
                 try {
-                    String snippet = "";
+                    String snippet;
                     snippet = getProviderAddress(provider.getProviderGeologicalPosition());
 
 
-                    int providerImage = R.drawable.powered_by_google_light; // set the default avatar
+                    int providerIcon = R.drawable.powered_by_google_light; // set the default avatar
                     try {
-                        providerImage = provider.getImage();
+                        providerIcon = provider.getIcon();
                     } catch (NumberFormatException e) {
                         Log.d(TAG, "addMapMarkers: no avatar for " + provider.getName() + ", setting default.");
                     }
@@ -125,7 +131,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
                             new LatLng(provider.getProviderGeologicalPosition().getLatitude(), provider.getProviderGeologicalPosition().getLongitude()),
                             provider.getName(),
                             snippet,
-                            providerImage,
+                            providerIcon,
                             provider
 
                     );
@@ -181,7 +187,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mMapView != null) {
             mMapView.onSaveInstanceState(outState);
@@ -190,7 +196,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
 
     @Override
     public void onMapReady(GoogleMap map) {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -200,7 +206,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
         mGoogleMap = map;
 
         addMapMarkers();
-
+        mGoogleMap.setOnInfoWindowClickListener(this);
 
     }
 
@@ -266,20 +272,14 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_full_screen_map:{
-
-                if(mMapLayoutState == MAP_LAYOUT_STATE_CONTRACTED){
-                    mMapLayoutState = MAP_LAYOUT_STATE_EXPANDED;
-                    expandMapAnimation();
-                }
-                else if(mMapLayoutState == MAP_LAYOUT_STATE_EXPANDED){
-                    mMapLayoutState = MAP_LAYOUT_STATE_CONTRACTED;
-                    contractMapAnimation();
-                }
-                break;
+        if (view.getId() == R.id.btn_full_screen_map) {
+            if (mMapLayoutState == MAP_LAYOUT_STATE_CONTRACTED) {
+                mMapLayoutState = MAP_LAYOUT_STATE_EXPANDED;
+                expandMapAnimation();
+            } else if (mMapLayoutState == MAP_LAYOUT_STATE_EXPANDED) {
+                mMapLayoutState = MAP_LAYOUT_STATE_CONTRACTED;
+                contractMapAnimation();
             }
-
         }
     }
 
@@ -299,5 +299,12 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback, Prov
             e.printStackTrace();
         }
         return "Pe undeva pe aici";
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(this.getContext(), ProviderActivity.class);
+        intent.putExtra("position",marker.getPosition());
+        startActivity(intent);
     }
 }

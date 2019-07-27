@@ -19,6 +19,7 @@ import com.example.retea.licentapp.models.Provider;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,6 +34,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         this.listener = listener;
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
@@ -48,7 +50,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
 
         holder.providerItemName.setText(provider.getName());
         holder.providerItemCategory.setText(provider.getCategory());
-        Picasso.get().load(provider.getImage()).into(holder.providerItemImage);
+        holder.providerItemIcon.setImageResource(provider.getIcon());
         holder.providerItemDistanceDifference.setText((distanceTo(provider.getProviderGeologicalPosition()))+" km");
         holder.providerItemLinearLaoyout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +68,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout providerItemLinearLaoyout;
-        ImageView providerItemImage;
+        ImageView providerItemIcon;
         TextView providerItemName;
         TextView providerItemCategory;
         TextView providerItemDistanceDifference;
@@ -74,7 +76,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             providerItemLinearLaoyout = itemView.findViewById(R.id.ProviderItemLinearLayout);
-            providerItemImage = itemView.findViewById(R.id.ProviderItemImageId);
+            providerItemIcon = itemView.findViewById(R.id.ProviderItemIconId);
             providerItemName = itemView.findViewById(R.id.ProviderItemNameId);
             providerItemCategory = itemView.findViewById(R.id.ProviderItemCategoryId);
             providerItemDistanceDifference = itemView.findViewById(R.id.ProviderItemDistanceDifferenceId);
@@ -96,7 +98,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
 
         Log.d(TAG, "distanceTo: " + deviceLocation.distanceTo(desiredLocation)/1000);
         float distance = deviceLocation.distanceTo(desiredLocation)/1000;
-        return String.format("%.2f",distance);
+        return String.format(Locale.getDefault(),"%.2f",distance);
 
 
 

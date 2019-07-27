@@ -1,5 +1,6 @@
 package com.example.retea.licentapp.models;
 
+import android.net.Uri;
 import android.provider.MediaStore;
 
 import java.util.List;
@@ -11,15 +12,17 @@ public class Provider {
     private String category;
     private GeologicalPosition geologicalPosition;
     private List<Service> serviceList;
-    private int image;
+    private int icon;
+    private Uri imageUri;
 
-    public Provider(int id, String name,String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int image) {
+    public Provider(int id, String name,String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.geologicalPosition = geologicalPosition;
         this.serviceList = serviceList;
-        this.image = image;
+        this.icon = icon;
+        imageUri = uri;
     }
 
     public int getId() {
@@ -54,12 +57,12 @@ public class Provider {
         this.serviceList = serviceList;
     }
 
-    public int getImage() {
-        return image;
+    public int getIcon() {
+        return icon;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 
     public String getCategory() {
@@ -68,6 +71,14 @@ public class Provider {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Uri getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(Uri uri) {
+        imageUri = uri;
     }
 
     public String toString(){

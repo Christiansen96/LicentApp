@@ -1,6 +1,7 @@
 package com.example.retea.licentapp;
 
 import android.app.Application;
+import android.net.Uri;
 import android.util.Log;
 
 import com.example.retea.licentapp.models.GeologicalPosition;
@@ -45,11 +46,11 @@ public class LicentApplication extends Application {
     }
     public void setProviders(){
         List<Service> dummyServiceList = new ArrayList<>();
-        globalProviderList.add(new Provider(1,"Dentist","Stomatologie", new GeologicalPosition(44.458742, 26.131624),dummyServiceList,R.drawable.ic_home_black_24dp ));
-        globalProviderList.add(new Provider(2,"Curatenie","Curatenie", new GeologicalPosition(44.458650, 26.130578),dummyServiceList,R.drawable.ic_home_black_24dp ));
-        globalProviderList.add(new Provider(3,"Masaj","Masaj", new GeologicalPosition(44.457188, 26.130584),dummyServiceList,R.drawable.ic_home_black_24dp ));
-        globalProviderList.add(new Provider(4,"Instalator","Instalator", new GeologicalPosition(44.456418, 26.128841),dummyServiceList,R.drawable.ic_home_black_24dp));
-        globalProviderList.add(new Provider(5,"Mobila","Mobila", new GeologicalPosition(44.456740, 26.139082),dummyServiceList,R.drawable.ic_home_black_24dp ));
+        globalProviderList.add(new Provider(1,"Dentist","Stomatologie", new GeologicalPosition(44.458742, 26.131624),dummyServiceList,R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        globalProviderList.add(new Provider(2,"Curatenie","Curatenie", new GeologicalPosition(44.458650, 26.130578),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg") ));
+        globalProviderList.add(new Provider(3,"Masaj","Masaj", new GeologicalPosition(44.457188, 26.130584),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg") ));
+        globalProviderList.add(new Provider(4,"Instalator","Instalator", new GeologicalPosition(44.456418, 26.128841),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        globalProviderList.add(new Provider(5,"Mobila","Mobila", new GeologicalPosition(44.456740, 26.139082),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg") ));
     }
     public static List<Provider> getProviders(){
         return globalProviderList;
