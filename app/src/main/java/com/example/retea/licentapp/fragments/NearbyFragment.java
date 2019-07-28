@@ -228,6 +228,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onItemClick(Provider provider) {
         Intent intent = new Intent(this.getContext(), ProviderActivity.class);
+        intent.putExtra("providerId", provider.getId());
         startActivity(intent);
         Log.d(TAG, "onItemClick: " + provider.toString());
     }

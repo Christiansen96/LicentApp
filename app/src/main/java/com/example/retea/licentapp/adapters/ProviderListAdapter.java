@@ -16,7 +16,6 @@ import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
 import com.example.retea.licentapp.models.GeologicalPosition;
 import com.example.retea.licentapp.models.Provider;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Locale;
