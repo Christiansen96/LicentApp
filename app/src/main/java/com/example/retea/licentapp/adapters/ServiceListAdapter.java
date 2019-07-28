@@ -47,7 +47,7 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
         holder.serviceName.setText(service.getName());
         holder.serviceShortDescription.setText(service.getShortDescription());
         holder.servicePrice.setText(String.valueOf(service.getPrice()));
-        holder.serviceDuration.setText(service.getDuration());
+        holder.serviceDuration.setText(String.valueOf(service.getDuration()));
 
 
     }
