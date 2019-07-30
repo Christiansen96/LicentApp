@@ -20,7 +20,6 @@ import com.example.retea.licentapp.models.Service;
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProviderActivity extends AppCompatActivity implements ServiceListAdapter.OnItemClickListener {
@@ -80,6 +79,11 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 
@@ -112,7 +116,15 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
 
     @Override
     public void onItemClick(Service service) {
+
         Toast.makeText(this, "Service " + service.getName() + " clicked. ", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ServiceActivity.class);
+        intent.putExtra("providerId", mCurrentProvider.getId());
+        intent.putExtra("serviceId", service.getId());
+        startActivity(intent);
+        Log.d(TAG, "onItemClick: " + service.getName());
+
 
     }
 }

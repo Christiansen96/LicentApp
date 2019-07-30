@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,15 +40,21 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ServiceListViewHolder holder, int position) {
 
-        Service service = mServiceList.get(position);
+        final Service service = mServiceList.get(position);
 
-        if(service.getImageUri() == null){
+        if (service.getImageUri() == null) {
             holder.serviceImage.setImageResource(R.drawable.ic_home_black_24dp);
         } else Picasso.get().load(service.getImageUri()).into(holder.serviceImage);
         holder.serviceName.setText(service.getName());
         holder.serviceShortDescription.setText(service.getShortDescription());
         holder.servicePrice.setText(String.valueOf(service.getPrice()));
         holder.serviceDuration.setText(String.valueOf(service.getDuration()));
+        holder.serviceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(service);
+            }
+        });
 
 
     }
@@ -64,10 +71,12 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
         TextView serviceShortDescription;
         TextView servicePrice;
         TextView serviceDuration;
+        LinearLayout serviceLayout;
 
         public ServiceListViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            serviceLayout = itemView.findViewById(R.id.ServiceItemLayoutId);
             serviceImage = itemView.findViewById(R.id.ServiceItemImageId);
             serviceName = itemView.findViewById(R.id.ServiceItemNameId);
             serviceShortDescription = itemView.findViewById(R.id.ServiceItemShortDescriptionId);

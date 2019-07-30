@@ -3,7 +3,9 @@ package com.example.retea.licentapp.activities;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,13 +40,13 @@ public class DashboardActivity extends AppCompatActivity {
         HomeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this,MainActivity.class));
+                startActivity(new Intent(DashboardActivity.this, MainActivity.class));
             }
         });
         AwayLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this,MainActivity.class));
+                startActivity(new Intent(DashboardActivity.this, MainActivity.class));
             }
         });
 

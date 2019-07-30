@@ -15,7 +15,7 @@ public class Provider {
     private int icon;
     private Uri imageUri;
 
-    public Provider(int id, String name,String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri) {
+    public Provider(int id, String name, String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -81,7 +81,7 @@ public class Provider {
         imageUri = uri;
     }
 
-    public String toString(){
+    public String toString() {
         return name + " " + category + " " + geologicalPosition.getLatitude() + " " + geologicalPosition.getLongitude();
     }
 }

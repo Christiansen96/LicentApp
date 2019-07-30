@@ -50,7 +50,7 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         holder.providerItemName.setText(provider.getName());
         holder.providerItemCategory.setText(provider.getCategory());
         holder.providerItemIcon.setImageResource(provider.getIcon());
-        holder.providerItemDistanceDifference.setText((distanceTo(provider.getProviderGeologicalPosition()))+" km");
+        holder.providerItemDistanceDifference.setText((distanceTo(provider.getProviderGeologicalPosition())) + " km");
         holder.providerItemLinearLaoyout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +86,8 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
     public interface OnItemClickListener {
         void onItemClick(Provider provider);
     }
-    private String distanceTo(GeologicalPosition geoPos){
+
+    private String distanceTo(GeologicalPosition geoPos) {
         Location deviceLocation = new Location("");
         deviceLocation.setLatitude(LicentApplication.getDeviceGeologicalPosition().getLatitude());
         deviceLocation.setLongitude(LicentApplication.getDeviceGeologicalPosition().getLongitude());
@@ -95,10 +96,9 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
         desiredLocation.setLatitude(geoPos.getLatitude());
         desiredLocation.setLongitude(geoPos.getLongitude());
 
-        Log.d(TAG, "distanceTo: " + deviceLocation.distanceTo(desiredLocation)/1000);
-        float distance = deviceLocation.distanceTo(desiredLocation)/1000;
-        return String.format(Locale.getDefault(),"%.2f",distance);
-
+        Log.d(TAG, "distanceTo: " + deviceLocation.distanceTo(desiredLocation) / 1000);
+        float distance = deviceLocation.distanceTo(desiredLocation) / 1000;
+        return String.format(Locale.getDefault(), "%.2f", distance);
 
 
     }

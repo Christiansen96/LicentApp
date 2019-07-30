@@ -1,9 +1,11 @@
 package com.example.retea.licentapp.activities;
 
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.viewpager.widget.ViewPager;
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setupViewPager(ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         MainFragmentAdapter adapter = new MainFragmentAdapter(getSupportFragmentManager());
         adapter.addFragment(new FavouritesFragment(), "Favourites");
         adapter.addFragment(new NearbyFragment(), "Nearby");

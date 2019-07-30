@@ -26,15 +26,14 @@ public class MyClusterManagerRenderer extends DefaultClusterRenderer<ClusterMark
         super(context, map, clusterManager);
 
 
-
         iconGenerator = new IconGenerator(context.getApplicationContext());
         imageView = new ImageView(context.getApplicationContext());
         markerWidth = (int) context.getResources().getDimension(R.dimen.custom_marker_image);
         markerHeight = (int) context.getResources().getDimension(R.dimen.custom_marker_image);
 
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(markerWidth,markerHeight));
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(markerWidth, markerHeight));
         int padding = (int) context.getResources().getDimension(R.dimen.custom_marker_padding);
-        imageView.setPadding(padding,padding,padding,padding);
+        imageView.setPadding(padding, padding, padding, padding);
         iconGenerator.setContentView(imageView);
     }
 

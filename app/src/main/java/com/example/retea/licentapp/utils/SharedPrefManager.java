@@ -13,7 +13,7 @@ public class SharedPrefManager {
     private static SharedPrefManager sharedPrefManager;
 
     public static SharedPrefManager getInstance(Context context) {
-        if (sharedPrefManager == null){
+        if (sharedPrefManager == null) {
             initialize(context);
             return sharedPrefManager;
         }

@@ -20,22 +20,21 @@ public class LicentApplication extends Application {
     private static List<Provider> globalProviderList = new ArrayList<>();
 
 
-
-    public static LicentApplication getInstance(){
-        if(applicationInstance == null){
+    public static LicentApplication getInstance() {
+        if (applicationInstance == null) {
             applicationInstance = new LicentApplication();
         }
         return applicationInstance;
     }
 
-    public static void setDeviceGeologicalPosition(GeologicalPosition geoPos){
+    public static void setDeviceGeologicalPosition(GeologicalPosition geoPos) {
         deviceGeoPos.setLatitude(geoPos.getLatitude());
         deviceGeoPos.setLongitude(geoPos.getLongitude());
-        Log.d(TAG, "setDeviceGeologicalPosition: latitude"+ deviceGeoPos.getLatitude());
-        Log.d(TAG, "setDeviceGeologicalPosition: longitude"+ deviceGeoPos.getLongitude());
+        Log.d(TAG, "setDeviceGeologicalPosition: latitude" + deviceGeoPos.getLatitude());
+        Log.d(TAG, "setDeviceGeologicalPosition: longitude" + deviceGeoPos.getLongitude());
     }
 
-    public static GeologicalPosition getDeviceGeologicalPosition(){
+    public static GeologicalPosition getDeviceGeologicalPosition() {
         return deviceGeoPos;
     }
 
@@ -44,29 +43,30 @@ public class LicentApplication extends Application {
         super.onCreate();
         setProviders();
     }
-    public void setProviders(){
-        List<Service> dummyServiceList = new ArrayList<>();
-        dummyServiceList.add(new Service(1," Detartraj",150.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(2," Detartraj",250.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(3," Detartraj",350.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(4," Detartraj",150.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(5," Detartraj",550.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(6," Detartraj",150.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(7," Detartraj",120.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(8," Detartraj",140.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(9," Detartraj",510.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        dummyServiceList.add(new Service(10," Detartraj",220.00,2,"Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung",Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
 
-        globalProviderList.add(new Provider(1,"Dentist","Stomatologie", new GeologicalPosition(44.458742, 26.131624),dummyServiceList,R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        globalProviderList.add(new Provider(2,"Curatenie","Curatenie", new GeologicalPosition(44.458650, 26.130578),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg") ));
-        globalProviderList.add(new Provider(3,"Masaj","Masaj", new GeologicalPosition(44.457188, 26.130584),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg") ));
-        globalProviderList.add(new Provider(4,"Instalator","Instalator", new GeologicalPosition(44.456418, 26.128841),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        globalProviderList.add(new Provider(5,"Mobila","Mobila", new GeologicalPosition(44.456740, 26.139082),dummyServiceList,R.drawable.ic_home_black_24dp,Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg") ));
+    public void setProviders() {
+        List<Service> dummyServiceList = new ArrayList<>();
+        dummyServiceList.add(new Service(1, " Detartraj", 150.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(2, " Detartraj", 250.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(3, " Detartraj", 350.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(4, " Detartraj", 150.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(5, " Detartraj", 550.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(6, " Detartraj", 150.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(7, " Detartraj", 120.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(8, " Detartraj", 140.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(9, " Detartraj", 510.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        dummyServiceList.add(new Service(10, " Detartraj", 220.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+
+        globalProviderList.add(new Provider(1, "Dentist", "Stomatologie", new GeologicalPosition(44.458742, 26.131624), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        globalProviderList.add(new Provider(2, "Curatenie", "Curatenie", new GeologicalPosition(44.458650, 26.130578), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        globalProviderList.add(new Provider(3, "Masaj", "Masaj", new GeologicalPosition(44.457188, 26.130584), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        globalProviderList.add(new Provider(4, "Instalator", "Instalator", new GeologicalPosition(44.456418, 26.128841), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        globalProviderList.add(new Provider(5, "Mobila", "Mobila", new GeologicalPosition(44.456740, 26.139082), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
     }
-    public static List<Provider> getProviders(){
+
+    public static List<Provider> getProviders() {
         return globalProviderList;
     }
-
 
 
 }

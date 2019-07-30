@@ -49,12 +49,11 @@ import java.util.Objects;
 public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         ProviderListAdapter.OnItemClickListener,
         View.OnClickListener,
-        GoogleMap.OnInfoWindowClickListener
-{
+        GoogleMap.OnInfoWindowClickListener {
 
     private static final String TAG = "NearbyFragment";
     private static final int MAP_LAYOUT_STATE_CONTRACTED = 0;
-    private static final int  MAP_LAYOUT_STATE_EXPANDED = 1;
+    private static final int MAP_LAYOUT_STATE_EXPANDED = 1;
 
 
     private MapView mMapView;
@@ -233,7 +232,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         Log.d(TAG, "onItemClick: " + provider.toString());
     }
 
-    private void expandMapAnimation(){
+    private void expandMapAnimation() {
         ViewWeightAnimationWrapper mapAnimationWrapper = new ViewWeightAnimationWrapper(mMapContainer);
         ObjectAnimator mapAnimation = ObjectAnimator.ofFloat(mapAnimationWrapper,
                 "weight",
@@ -252,7 +251,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         mapAnimation.start();
     }
 
-    private void contractMapAnimation(){
+    private void contractMapAnimation() {
         ViewWeightAnimationWrapper mapAnimationWrapper = new ViewWeightAnimationWrapper(mMapContainer);
         ObjectAnimator mapAnimation = ObjectAnimator.ofFloat(mapAnimationWrapper,
                 "weight",
@@ -305,7 +304,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onInfoWindowClick(Marker marker) {
         Intent intent = new Intent(this.getContext(), ProviderActivity.class);
-        intent.putExtra("position",marker.getPosition());
+        intent.putExtra("position", marker.getPosition());
         startActivity(intent);
     }
 }

@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -45,7 +47,7 @@ public class StartActivity extends AppCompatActivity {
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
-                startActivity(new Intent(this,DashboardActivity.class));
+                startActivity(new Intent(this, DashboardActivity.class));
 //                onDestroy();
                 //ceva
             } else {
@@ -71,8 +73,6 @@ public class StartActivity extends AppCompatActivity {
 //        }
 
 
-
-
     }
 
     @Override
@@ -81,7 +81,7 @@ public class StartActivity extends AppCompatActivity {
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
-                startActivity(new Intent(this,DashboardActivity.class));
+                startActivity(new Intent(this, DashboardActivity.class));
 //                onDestroy();
                 //ceva
             } else {
@@ -89,7 +89,6 @@ public class StartActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
     private void getDeviceLocation() {
@@ -114,9 +113,9 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
-    private boolean checkMapServices(){
-        if(isServicesOK()){
-            if(isMapsEnabled()){
+    private boolean checkMapServices() {
+        if (isServicesOK()) {
+            if (isMapsEnabled()) {
                 return true;
             }
         }
@@ -137,10 +136,10 @@ public class StartActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public boolean isMapsEnabled(){
-        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+    public boolean isMapsEnabled() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
             return false;
         }
@@ -158,7 +157,7 @@ public class StartActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
             getDeviceLocation();
-            startActivity(new Intent(this,DashboardActivity.class));
+            startActivity(new Intent(this, DashboardActivity.class));
 //            onDestroy();
             //ceva
         } else {
@@ -168,22 +167,21 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    public boolean isServicesOK(){
+    public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
 
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(StartActivity.this);
 
-        if(available == ConnectionResult.SUCCESS){
+        if (available == ConnectionResult.SUCCESS) {
             //everything is fine and the user can make map requests
             Log.d(TAG, "isServicesOK: Google Play Services is working");
             return true;
-        }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
             //an error occured but we can resolve it
             Log.d(TAG, "isServicesOK: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(StartActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
-        }else{
+        } else {
             Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -211,13 +209,12 @@ public class StartActivity extends AppCompatActivity {
         Log.d(TAG, "onActivityResult: called.");
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
-                if(mLocationPermissionGranted){
+                if (mLocationPermissionGranted) {
                     getDeviceLocation();
-                    startActivity(new Intent(this,DashboardActivity.class));
+                    startActivity(new Intent(this, DashboardActivity.class));
 //                    onDestroy();
                     //ceva
-                }
-                else{
+                } else {
                     getLocationPermission();
                 }
             }
