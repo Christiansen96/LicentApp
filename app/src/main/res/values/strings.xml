@@ -8,5 +8,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="google_map_api_key">AIzaSyB1NuImZOBesZgM1jBlYO-q1x71WA2aoMA</string>
     <string name="service_mock_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum, mi a elementum lacinia, ex enim euismod massa, vel elementum est ante ut nisl. Donec rhoncus odio at eros fermentum hendrerit. Nam ac odio non mi porta faucibus. Class aptent.</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
