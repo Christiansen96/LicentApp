@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends BaseNavigationDrawer {
     private static final String TAG = "DashboardActivity";
 
     private TextView AddressTextView;
@@ -51,6 +51,11 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected int getNavigationItemID() {
+        return 0;
     }
 
     private void getDeviceAddress() {
