@@ -22,6 +22,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
+
 public class ProviderActivity extends AppCompatActivity implements ServiceListAdapter.OnItemClickListener {
     private static final String TAG = "ProviderActivity";
 
@@ -33,6 +36,7 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
     private RecyclerView serviceListRecyclerView;
 
     private Provider mCurrentProvider;
+    private int mProviderType;
 
 
     @Override
@@ -89,28 +93,59 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
 
     private void checkIntentForProviderInfo(Intent intent) {
 
+        mProviderType = intent.getExtras().getInt("providersType");
+
         int intentId = intent.getExtras().getInt("providerId");
         Log.d(TAG, "onCreate: id " + intentId);
-        if (intentId != 0) {
-            for (Provider provider : LicentApplication.getProviders()) {
-                if (intentId == provider.getId()) {
-                    mCurrentProvider = provider;
-                    break;
+
+        if(mProviderType == PROVIDER_TYPE_HOME){
+
+            if (intentId != 0) {
+                for (Provider provider : LicentApplication.getHomeProvidersList()) {
+                    if (intentId == provider.getId()) {
+                        mCurrentProvider = provider;
+                        break;
+                    }
                 }
             }
-        }
 
 
-        LatLng intentPosition = (LatLng) intent.getExtras().get("position");
-        Log.d(TAG, "onCreate: position " + intentPosition);
-        if (intentPosition != null) {
-            for (Provider provider : LicentApplication.getProviders()) {
-                if (intentPosition.latitude == provider.getProviderGeologicalPosition().getLatitude() && intentPosition.longitude == provider.getProviderGeologicalPosition().getLongitude()) {
-                    mCurrentProvider = provider;
-                    break;
+            LatLng intentPosition = (LatLng) intent.getExtras().get("position");
+            Log.d(TAG, "onCreate: position " + intentPosition);
+            if (intentPosition != null) {
+                for (Provider provider : LicentApplication.getHomeProvidersList()) {
+                    if (intentPosition.latitude == provider.getProviderGeologicalPosition().getLatitude() && intentPosition.longitude == provider.getProviderGeologicalPosition().getLongitude()) {
+                        mCurrentProvider = provider;
+                        break;
+                    }
                 }
             }
+
+        }else if (mProviderType == PROVIDER_TYPE_AWAY){
+
+            if (intentId != 0) {
+                for (Provider provider : LicentApplication.getAwayProviderList()) {
+                    if (intentId == provider.getId()) {
+                        mCurrentProvider = provider;
+                        break;
+                    }
+                }
+            }
+
+
+            LatLng intentPosition = (LatLng) intent.getExtras().get("position");
+            Log.d(TAG, "onCreate: position " + intentPosition);
+            if (intentPosition != null) {
+                for (Provider provider : LicentApplication.getAwayProviderList()) {
+                    if (intentPosition.latitude == provider.getProviderGeologicalPosition().getLatitude() && intentPosition.longitude == provider.getProviderGeologicalPosition().getLongitude()) {
+                        mCurrentProvider = provider;
+                        break;
+                    }
+                }
+            }
+
         }
+
 
     }
 
@@ -122,6 +157,7 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
         Intent intent = new Intent(this, ServiceActivity.class);
         intent.putExtra("providerId", mCurrentProvider.getId());
         intent.putExtra("serviceId", service.getId());
+        intent.putExtra("providersType",mProviderType);
         startActivity(intent);
         Log.d(TAG, "onItemClick: " + service.getName());
 

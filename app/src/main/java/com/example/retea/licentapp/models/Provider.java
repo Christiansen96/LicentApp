@@ -14,8 +14,9 @@ public class Provider {
     private List<Service> serviceList;
     private int icon;
     private Uri imageUri;
+    private int type;
 
-    public Provider(int id, String name, String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri) {
+    public Provider(int id, String name, String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri, int type) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -23,6 +24,15 @@ public class Provider {
         this.serviceList = serviceList;
         this.icon = icon;
         imageUri = uri;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getId() {

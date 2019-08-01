@@ -18,6 +18,9 @@ import com.example.retea.licentapp.models.Service;
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
+
 public class ServiceActivity extends AppCompatActivity {
     private static final String TAG = "ServiceActivity";
 
@@ -30,6 +33,7 @@ public class ServiceActivity extends AppCompatActivity {
 
     private Provider mCurrentProvider;
     private Service mCurrentService;
+    private int mProviderType;
 
 
     @Override
@@ -85,14 +89,29 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void checkIntentForProviderInfo(Intent intent) {
 
+        mProviderType = intent.getExtras().getInt("providersType");
+
         int providerId = intent.getExtras().getInt("providerId");
         Log.d(TAG, "onCreate: id " + providerId);
-        if (providerId != 0) {
-            for (Provider provider : LicentApplication.getProviders()) {
-                if (providerId == provider.getId()) {
-                    mCurrentProvider = provider;
+
+        if (mProviderType == PROVIDER_TYPE_HOME) {
+            if (providerId != 0) {
+                for (Provider provider : LicentApplication.getHomeProvidersList()) {
+                    if (providerId == provider.getId()) {
+                        mCurrentProvider = provider;
+                    }
                 }
             }
+
+        } else if (mProviderType == PROVIDER_TYPE_AWAY) {
+            if (providerId != 0) {
+                for (Provider provider : LicentApplication.getAwayProviderList()) {
+                    if (providerId == provider.getId()) {
+                        mCurrentProvider = provider;
+                    }
+                }
+            }
+
         }
 
         int serviceId = intent.getExtras().getInt("serviceId");

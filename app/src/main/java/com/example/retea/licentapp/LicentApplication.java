@@ -11,13 +11,17 @@ import com.example.retea.licentapp.models.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
+
 public class LicentApplication extends Application {
     private static final String TAG = "LicentApplication";
 
     public static LicentApplication applicationInstance;
     private static GeologicalPosition deviceGeoPos = new GeologicalPosition();
     private static String deviceAddress = "";
-    private static List<Provider> globalProviderList = new ArrayList<>();
+    private static List<Provider> homeProviderList = new ArrayList<>();
+    private static List<Provider> awayProviderList = new ArrayList<>();
 
 
     public static LicentApplication getInstance() {
@@ -57,15 +61,34 @@ public class LicentApplication extends Application {
         dummyServiceList.add(new Service(9, " Detartraj", 510.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
         dummyServiceList.add(new Service(10, " Detartraj", 220.00, 2, "Detartraj profesional", "Pula mea s o sugi nuj bag si eu ceva mai lung", Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
 
-        globalProviderList.add(new Provider(1, "Dentist", "Stomatologie", new GeologicalPosition(44.458742, 26.131624), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        globalProviderList.add(new Provider(2, "Curatenie", "Curatenie", new GeologicalPosition(44.458650, 26.130578), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        globalProviderList.add(new Provider(3, "Masaj", "Masaj", new GeologicalPosition(44.457188, 26.130584), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        globalProviderList.add(new Provider(4, "Instalator", "Instalator", new GeologicalPosition(44.456418, 26.128841), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
-        globalProviderList.add(new Provider(5, "Mobila", "Mobila", new GeologicalPosition(44.456740, 26.139082), dummyServiceList, R.drawable.ic_home_black_24dp, Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg")));
+        homeProviderList.add(new Provider(1, "Dentist", "Stomatologie", new GeologicalPosition(44.458742, 26.131624), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_HOME));
+        homeProviderList.add(new Provider(2, "Curatenie", "Curatenie", new GeologicalPosition(44.458650, 26.130578), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_HOME));
+        homeProviderList.add(new Provider(3, "Masaj", "Masaj", new GeologicalPosition(44.457188, 26.130584), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_HOME));
+        homeProviderList.add(new Provider(4, "Instalator", "Instalator", new GeologicalPosition(44.456418, 26.128841), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_HOME));
+        homeProviderList.add(new Provider(5, "Mobila", "Mobila", new GeologicalPosition(44.456740, 26.139082), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_HOME));
+
+        awayProviderList.add(new Provider(1, "Dentist", "Stomatologie", new GeologicalPosition(44.458742, 26.131624), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_AWAY));
+        awayProviderList.add(new Provider(2, "Curatenie", "Curatenie", new GeologicalPosition(44.458650, 26.130578), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_AWAY));
+        awayProviderList.add(new Provider(3, "Masaj", "Masaj", new GeologicalPosition(44.457188, 26.130584), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_AWAY));
+        awayProviderList.add(new Provider(4, "Instalator", "Instalator", new GeologicalPosition(44.456418, 26.128841), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_AWAY));
+        awayProviderList.add(new Provider(5, "Mobila", "Mobila", new GeologicalPosition(44.456740, 26.139082), dummyServiceList, R.drawable.ic_home_black_24dp,
+                Uri.parse("https://www.familydentalcare.co.za/wp-content/uploads/2018/06/emergency-dentist-in-midrand-1024x542.jpg"),PROVIDER_TYPE_AWAY));
     }
 
-    public static List<Provider> getProviders() {
-        return globalProviderList;
+    public static List<Provider> getHomeProvidersList() {
+        return homeProviderList;
+    }
+    public static List<Provider> getAwayProviderList() {
+        return awayProviderList;
     }
 
 

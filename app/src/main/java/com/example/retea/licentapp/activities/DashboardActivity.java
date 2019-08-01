@@ -11,12 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.retea.licentapp.R;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
 
 public class DashboardActivity extends BaseNavigationDrawer {
     private static final String TAG = "DashboardActivity";
@@ -40,22 +44,48 @@ public class DashboardActivity extends BaseNavigationDrawer {
         HomeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this, MainActivity.class));
+                Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+                intent.putExtra("providersType", PROVIDER_TYPE_HOME);
+                intent.putExtra("tab",1);
+                startActivity(intent);
             }
         });
         AwayLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this, MainActivity.class));
+                Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+                intent.putExtra("providersType", PROVIDER_TYPE_AWAY);
+                intent.putExtra("tab",1);
+                startActivity(intent);
             }
         });
 
 
     }
 
+    private int backpress = 0;
     @Override
-    protected int getNavigationItemID() {
-        return 0;
+    public void onBackPressed() {
+        backpress = (backpress + 1);
+        Toast.makeText(getApplicationContext(), " Press Back again to Exit ", Toast.LENGTH_SHORT).show();
+
+        if (backpress > 1) {
+            super.onBackPressed();
+            finishAffinity();
+
+        }else{
+            new android.os.Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    backpress = 0;
+                }
+            }, 2000);
+        }
+    }
+
+    @Override
+    protected int getNavigationItemId() {
+        return R.id.nav_dashboard;
     }
 
     private void getDeviceAddress() {

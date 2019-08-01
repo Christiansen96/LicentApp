@@ -46,6 +46,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
+
 public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         ProviderListAdapter.OnItemClickListener,
         View.OnClickListener,
@@ -68,6 +71,8 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
     private MyClusterManagerRenderer mClusterManagerRenderer;
     private ArrayList<ClusterMarker> mClusterMarkers;
     private int mMapLayoutState = 0;
+    private int mProvidersType;
+    private List<Provider> mProviderList;
 
 
     @Nullable
@@ -79,13 +84,22 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         mMapView.getMapAsync(this);
         mMapContainer = view.findViewById(R.id.map_container);
         view.findViewById(R.id.btn_full_screen_map).setOnClickListener(this);
+        if (getArguments() != null) {
+            Log.d(TAG, "onCreateView: getArguments not null");
+            mProvidersType = getArguments().getInt("providersType");
+            Log.d(TAG, "onCreateView: " + mProvidersType);
+        }
+        if (mProvidersType == PROVIDER_TYPE_HOME){
+            mProviderList = LicentApplication.getHomeProvidersList();
+        }else if(mProvidersType == PROVIDER_TYPE_AWAY){
+            mProviderList = LicentApplication.getAwayProviderList();
+        }
 
-        List<Provider> providers = LicentApplication.getProviders();
 
         providerListRecyclerView = view.findViewById(R.id.ProviderListRecyclerView);
         providerListRecyclerView.setHasFixedSize(true);
 
-        ProviderListAdapter providerListAdapter = new ProviderListAdapter(providers, this);
+        ProviderListAdapter providerListAdapter = new ProviderListAdapter(mProviderList, this);
         layoutManager = new LinearLayoutManager(this.getContext());
         providerListRecyclerView.setLayoutManager(layoutManager);
 
@@ -101,7 +115,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         if (mGoogleMap != null) {
 
             if (mClusterManager == null) {
-                mClusterManager = new ClusterManager<ClusterMarker>(Objects.requireNonNull(getActivity()).getApplicationContext(), mGoogleMap);
+                mClusterManager = new ClusterManager<>(Objects.requireNonNull(getActivity()).getApplicationContext(), mGoogleMap);
             }
             if (mClusterManagerRenderer == null) {
                 mClusterManagerRenderer = new MyClusterManagerRenderer(
@@ -112,7 +126,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
                 mClusterManager.setRenderer(mClusterManagerRenderer);
             }
 
-            for (Provider provider : LicentApplication.getProviders()) {
+            for (Provider provider : mProviderList) {
 
                 Log.d(TAG, "addMapMarkers: location: " + provider.getProviderGeologicalPosition().toString());
                 try {
@@ -228,6 +242,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
     public void onItemClick(Provider provider) {
         Intent intent = new Intent(this.getContext(), ProviderActivity.class);
         intent.putExtra("providerId", provider.getId());
+        intent.putExtra("providersType",provider.getType());
         startActivity(intent);
         Log.d(TAG, "onItemClick: " + provider.toString());
     }

@@ -2,30 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <group
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="My Profile">
-        </item>
+            android:title="My Profile"></item>
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="Dashboard">
-        </item>
+            android:title="Dashboard"></item>
         <item
             android:id="@+id/nav_home_providers"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home Providers">
-        </item>
+            android:title="Home Providers"></item>
         <item
             android:id="@+id/nav_away_providers"
             android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="Away">
-        </item>
+            android:title="Away Providers"></item>
     </group>
 
     <item android:title="Actions">
@@ -33,8 +27,7 @@
             <item
                 android:id="@+id/nav_search"
                 android:icon="@drawable/ic_search_black_24dp"
-                android:title="Search">
-            </item>
+                android:title="Search"></item>
         </menu>
     </item>
 </menu>

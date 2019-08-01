@@ -1,5 +1,6 @@
 package com.example.retea.licentapp.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.retea.licentapp.R;
 import com.google.android.material.navigation.NavigationView;
+
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
+import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
 
 public abstract class BaseNavigationDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "BaseNavigationDrawer";
@@ -120,7 +124,7 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
         drawerLayout.closeDrawer(GravityCompat.START);
 
         final int mItemId = menuItem.getItemId();
-        if (mItemId == getNavigationItemID()) {
+        if (mItemId == getNavigationItemId()) {
             return true;
         }
         onMenuItemClick(mItemId);
@@ -130,22 +134,41 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
     public void onMenuItemClick(int item) {
         switch (item) {
             case R.id.nav_dashboard:
+                Log.d(TAG, "onMenuItemClick:  open dashboard activity");
+                Intent dashboardActivityIntent = new Intent(this,DashboardActivity.class);
+                startActivity(dashboardActivityIntent);
 
                 break;
             case R.id.nav_profile:
+                Log.d(TAG, "onMenuItemClick:  open profile activity");
+                Intent myProfileActivityIntent = new Intent(this,MyProfileActivity.class);
+                startActivity(myProfileActivityIntent);
 
                 break;
             case R.id.nav_home_providers:
+                Log.d(TAG, "onMenuItemClick:  open home providers activity");
+                Intent homeProvidersActivityIntent = new Intent(this,MainActivity.class);
+                homeProvidersActivityIntent.putExtra("providersType",PROVIDER_TYPE_HOME);
+                startActivity(homeProvidersActivityIntent);
 
                 break;
             case R.id.nav_away_providers:
+                Log.d(TAG, "onMenuItemClick:  open away providers activity");
+                Intent awayProvidersActivityIntent = new Intent(this,MainActivity.class);
+                awayProvidersActivityIntent.putExtra("providersType",PROVIDER_TYPE_AWAY);
+                startActivity(awayProvidersActivityIntent);
 
                 break;
             case R.id.nav_search:
+                Log.d(TAG, "onMenuItemClick:  open main activity with search fragment focused");
+                Intent searchActivityIntent = new Intent(this,MainActivity.class);
+                searchActivityIntent.putExtra("tab",2);
+                searchActivityIntent.putExtra("providersType",PROVIDER_TYPE_AWAY);
+                startActivity(searchActivityIntent);
 
                 break;
 
         }
     }
-    protected abstract int getNavigationItemID();
+    protected abstract int getNavigationItemId();
 }
