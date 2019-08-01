@@ -149,6 +149,7 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 Log.d(TAG, "onMenuItemClick:  open home providers activity");
                 Intent homeProvidersActivityIntent = new Intent(this,MainActivity.class);
                 homeProvidersActivityIntent.putExtra("providersType",PROVIDER_TYPE_HOME);
+                homeProvidersActivityIntent.putExtra("tab",1);
                 startActivity(homeProvidersActivityIntent);
 
                 break;
@@ -156,6 +157,7 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 Log.d(TAG, "onMenuItemClick:  open away providers activity");
                 Intent awayProvidersActivityIntent = new Intent(this,MainActivity.class);
                 awayProvidersActivityIntent.putExtra("providersType",PROVIDER_TYPE_AWAY);
+                awayProvidersActivityIntent.putExtra("tab",1);
                 startActivity(awayProvidersActivityIntent);
 
                 break;
