@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "22559028645-qvu6v67oqd5fq675jl2ef1rnqitiqulh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.retea.licentapp",
+            "certificate_hash": "aabfc8dfdf8c46cd4cc1cd06c2360e2e062ec6b9"
+          }
+        },
+        {
           "client_id": "22559028645-8kargehlbjmt7mfli3680s068fen4is8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -25,15 +33,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": [4]
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22559028645-8kargehlbjmt7mfli3680s068fen4is8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
