@@ -18,7 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.AppointmentActivity"></activity>
+        <activity android:name=".activities.GoogleAuthenticationActivity"></activity>
+        <activity android:name=".activities.FacebookAuthenticationActivity" />
+        <activity android:name=".activities.AuthenticationMethodsActivity" />
+        <activity android:name=".activities.EmailAndPasswordAuthenticationActivity" />
+        <activity android:name=".activities.AppointmentActivity" />
         <activity android:name=".activities.MyProfileActivity" />
         <activity android:name=".activities.ServiceActivity" />
         <activity android:name=".activities.ProviderActivity" />
@@ -36,6 +40,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_api_key" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

@@ -138,4 +138,10 @@
     </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/goToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Login Activity"/>
+
 </LinearLayout>

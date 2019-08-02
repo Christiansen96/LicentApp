@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +27,7 @@ public class DashboardActivity extends BaseNavigationDrawer {
     private TextView AddressTextView;
     private LinearLayout HomeLayout;
     private LinearLayout AwayLayout;
+    private Button goToLoginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,13 @@ public class DashboardActivity extends BaseNavigationDrawer {
         AddressTextView = findViewById(R.id.AddressTextViewId);
         HomeLayout = findViewById(R.id.HomeLayout);
         AwayLayout = findViewById(R.id.AwayLayout);
+        goToLoginBtn = findViewById(R.id.goToLogin);
+        goToLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, AuthenticationMethodsActivity.class));
+            }
+        });
 
         getDeviceAddress();
 
