@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
 
 import java.io.IOException;
@@ -66,6 +67,8 @@ public class DashboardActivity extends BaseNavigationDrawer {
                 startActivity(intent);
             }
         });
+
+        LicentApplication.downloadProviderListFromDB();
 
 
     }

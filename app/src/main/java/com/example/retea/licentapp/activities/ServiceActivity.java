@@ -95,11 +95,11 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         Picasso.get().load(mCurrentService.getImageUri()).into(serviceImage);
         serviceName.setText(mCurrentService.getName());
         serviceLongDescription.setText(mCurrentService.getLongDescription());
-        if (mCurrentService.getDuration() != 0) {
+        if (!mCurrentService.getDuration().equals("0")) {
             String duration = "Duration: ~" + mCurrentService.getDuration() + "h";
             serviceDuration.setText(duration);
         } else serviceDuration.setText("");
-        if (mCurrentService.getPrice() != 0) {
+        if (!mCurrentService.getPrice().equals("0")) {
             String price = "Price: " + mCurrentService.getPrice() + " lei";
             servicePrice.setText(price);
         } else servicePrice.setText("");
@@ -122,22 +122,22 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
 
         mProviderType = intent.getExtras().getInt("providersType");
 
-        int providerId = intent.getExtras().getInt("providerId");
+        String providerId =(String) intent.getExtras().get("providerId");
         Log.d(TAG, "onCreate: id " + providerId);
 
         if (mProviderType == PROVIDER_TYPE_HOME) {
-            if (providerId != 0) {
+            if (!providerId.equals("0")) {
                 for (Provider provider : LicentApplication.getHomeProvidersList()) {
-                    if (providerId == provider.getId()) {
+                    if (providerId.equals(provider.getId())) {
                         mCurrentProvider = provider;
                     }
                 }
             }
 
         } else if (mProviderType == PROVIDER_TYPE_AWAY) {
-            if (providerId != 0) {
+            if (!providerId.equals("0")) {
                 for (Provider provider : LicentApplication.getAwayProviderList()) {
-                    if (providerId == provider.getId()) {
+                    if (providerId.equals(provider.getId())) {
                         mCurrentProvider = provider;
                     }
                 }
@@ -145,12 +145,12 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
 
         }
 
-        int serviceId = intent.getExtras().getInt("serviceId");
+        String serviceId = (String) intent.getExtras().get("serviceId");
         Log.d(TAG, "onCreate: service with id " + serviceId);
         if (mCurrentProvider != null) {
-            if (serviceId != 0) {
+            if (!serviceId.equals("0")) {
                 for (Service service : mCurrentProvider.getServiceList()) {
-                    if (serviceId == service.getId()) {
+                    if (serviceId.equals(service.getId())){
                         mCurrentService = service;
                     }
                 }

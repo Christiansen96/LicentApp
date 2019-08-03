@@ -95,14 +95,14 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
 
         mProviderType = intent.getExtras().getInt("providersType");
 
-        int intentId = intent.getExtras().getInt("providerId");
+        String intentId = (String)intent.getExtras().get("providerId");
         Log.d(TAG, "onCreate: id " + intentId);
 
         if(mProviderType == PROVIDER_TYPE_HOME){
 
-            if (intentId != 0) {
+            if (!intentId.equals("0")) {
                 for (Provider provider : LicentApplication.getHomeProvidersList()) {
-                    if (intentId == provider.getId()) {
+                    if (intentId.equals(provider.getId())) {
                         mCurrentProvider = provider;
                         break;
                     }
@@ -123,7 +123,7 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
 
         }else if (mProviderType == PROVIDER_TYPE_AWAY){
 
-            if (intentId != 0) {
+            if (!intentId.equals("0")) {
                 for (Provider provider : LicentApplication.getAwayProviderList()) {
                     if (intentId == provider.getId()) {
                         mCurrentProvider = provider;

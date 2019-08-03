@@ -47,8 +47,8 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
         } else Picasso.get().load(service.getImageUri()).into(holder.serviceImage);
         holder.serviceName.setText(service.getName());
         holder.serviceShortDescription.setText(service.getShortDescription());
-        holder.servicePrice.setText(String.valueOf(service.getPrice()));
-        holder.serviceDuration.setText(String.valueOf(service.getDuration()));
+        holder.servicePrice.setText(service.getPrice());
+        holder.serviceDuration.setText(service.getDuration());
         holder.serviceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -4,15 +4,16 @@ import android.net.Uri;
 
 public class Service {
 
-    private int id;
+    private String id;
     private String name;
-    private double price;
-    private int duration;
+    private String price;
+    private String duration;
     private Uri imageUri;
     private String shortDescription;
     private String longDescription;
+    private String providerId;
 
-    public Service(int id, String name, double price, int duration, String shortDescription, String longDescription) {
+    public Service(String id, String name, String price, String duration, String shortDescription, String longDescription) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -22,7 +23,7 @@ public class Service {
 
     }
 
-    public Service(int id, String name, double price, int duration, String shortDescription, String longDescription, Uri imageUri) {
+    public Service(String id, String name, String price, String duration, String shortDescription, String longDescription, Uri imageUri, String providerId) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -30,6 +31,8 @@ public class Service {
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.imageUri = imageUri;
+        this.providerId = providerId;
+
 
 
     }
@@ -50,11 +53,11 @@ public class Service {
         this.longDescription = longDescription;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -66,19 +69,19 @@ public class Service {
         this.name = name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -88,5 +91,17 @@ public class Service {
 
     public void setImageUri(Uri imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
+
+    public String toString() {
+        return String.valueOf(id) + " " + name + " " + String.valueOf(price) + " " + String.valueOf(duration) + " " + shortDescription + " " + longDescription;
     }
 }

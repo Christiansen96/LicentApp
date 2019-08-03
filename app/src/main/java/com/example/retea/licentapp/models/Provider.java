@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Provider {
 
-    private int id;
+    private String id;
     private String name;
     private String category;
     private GeologicalPosition geologicalPosition;
@@ -16,7 +16,7 @@ public class Provider {
     private Uri imageUri;
     private int type;
 
-    public Provider(int id, String name, String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri, int type) {
+    public Provider(String id, String name, String category, GeologicalPosition geologicalPosition, List<Service> serviceList, int icon, Uri uri, int type) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -35,11 +35,11 @@ public class Provider {
         this.type = type;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
