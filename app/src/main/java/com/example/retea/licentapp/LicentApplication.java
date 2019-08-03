@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -31,6 +32,7 @@ public class LicentApplication extends Application {
     private static String deviceAddress = "";
     private static List<Provider> homeProviderList = new ArrayList<>();
     private static List<Provider> awayProviderList = new ArrayList<>();
+    private static List<Service> mServiceList = new ArrayList<>();
 
 
     public static LicentApplication getInstance() {
@@ -54,7 +56,8 @@ public class LicentApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        setProviders();
+        downloadServicesFromDB();
+        downloadProvidersFromDB();
     }
 
     public void setProviders() {
@@ -81,10 +84,10 @@ public class LicentApplication extends Application {
         return awayProviderList;
     }
 
-    public static void downloadProviderListFromDB() {
+    public static void downloadServicesFromDB() {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        CollectionReference providerRef = firebaseFirestore.collection("providers");
         CollectionReference serviceRef = firebaseFirestore.collection("services");
+        mServiceList.clear();
 
 
         serviceRef.get()
@@ -96,13 +99,14 @@ public class LicentApplication extends Application {
 
                             String id = (String) documentSnapshot.get("id");
                             String name = (String) documentSnapshot.get("name");
-                            String price = (String)documentSnapshot.get("id");;
+                            String price = (String)documentSnapshot.get("price");
                             String duration = (String)documentSnapshot.get("duration");
                             String shortDescription = (String) documentSnapshot.get("shortDescription");
                             String longDescription = (String) documentSnapshot.get("longDescription");
                             String imageUri = (String) documentSnapshot.get("imageUri");
                             String providerId = (String) documentSnapshot.get("providerId");
                             Service service = new Service(id,name,price,duration,shortDescription,longDescription,Uri.parse(imageUri),providerId);
+                            mServiceList.add(service);
 
 
                             Log.d(TAG, "onSuccess: " + service.toString());
@@ -114,6 +118,67 @@ public class LicentApplication extends Application {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+
+
+                    }
+                });
+
+
+
+
+    }
+
+    public static void downloadProvidersFromDB() {
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference providerRef = firebaseFirestore.collection("providers");
+        homeProviderList.clear();
+        awayProviderList.clear();
+
+
+
+        providerRef.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        String data = "";
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+
+
+                            String id = (String) documentSnapshot.get("id");
+                            String name = (String) documentSnapshot.get("name");
+                            String category = (String)documentSnapshot.get("category");
+                            GeoPoint geoPoint = (GeoPoint)documentSnapshot.get("geoPoint");
+                            int icon =Integer.parseInt(String.valueOf(documentSnapshot.get("icon")));
+                            String imageUri = (String) documentSnapshot.get("imageUri");
+                            int type =Integer.parseInt(String.valueOf(documentSnapshot.get("type")));
+                            Provider provider = new Provider(id,name,category,new GeologicalPosition(geoPoint.getLatitude(),geoPoint.getLongitude()),icon,Uri.parse(imageUri),type);
+                            List<Service> currentProviderServiceList = new ArrayList<>();
+                            for(Service service : mServiceList){
+                                if(service.getProviderId().equals(id)){
+                                    currentProviderServiceList.add(service);
+                                    Log.d(TAG, "onSuccess: for services FOUND ONE");
+                                }
+                            }
+                            provider.setServiceList(currentProviderServiceList);
+                            if(type == PROVIDER_TYPE_HOME){
+                                homeProviderList.add(provider);
+                            }else if(type == PROVIDER_TYPE_AWAY){
+                                awayProviderList.add(provider);
+                            }
+
+
+
+                            Log.d(TAG, "onSuccess: " + provider.toString());
+
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
 
                     }
                 });

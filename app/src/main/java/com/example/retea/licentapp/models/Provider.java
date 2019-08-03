@@ -27,6 +27,16 @@ public class Provider {
         this.type = type;
     }
 
+    public Provider(String id, String name, String category, GeologicalPosition geologicalPosition, int icon, Uri uri, int type) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.geologicalPosition = geologicalPosition;
+        this.icon = icon;
+        imageUri = uri;
+        this.type = type;
+    }
+
     public int getType() {
         return type;
     }
