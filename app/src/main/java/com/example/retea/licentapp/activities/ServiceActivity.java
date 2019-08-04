@@ -17,9 +17,15 @@ import android.widget.Toast;
 
 import com.example.retea.licentapp.LicentApplication;
 import com.example.retea.licentapp.R;
+import com.example.retea.licentapp.fragments.TextInputDialog;
+import com.example.retea.licentapp.models.Appointment;
 import com.example.retea.licentapp.models.Provider;
 import com.example.retea.licentapp.models.Service;
+import com.example.retea.licentapp.models.User;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.time.Clock;
@@ -29,7 +35,7 @@ import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
 import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
 
 public class ServiceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,
-        TimePickerDialog.OnTimeSetListener {
+        TimePickerDialog.OnTimeSetListener, TextInputDialog.TextInputDialogListener {
     private static final String TAG = "ServiceActivity";
 
     private TextView serviceName;
@@ -42,10 +48,18 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
     private TextView shownTime;
     private Button chooseTimeButton;
     private Button chooseDateButton;
+    private Button addNoteButton;
 
     private Provider mCurrentProvider;
     private Service mCurrentService;
     private int mProviderType;
+
+    private Integer mAppointmentDay;
+    private Integer mAppointmentMonth;
+    private Integer mAppointmentYear;
+    private Integer mAppointmentHour;
+    private Integer mAppointmentMinute;
+    private String mNote = "";
 
 
     @Override
@@ -79,6 +93,7 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         chooseTimeButton = findViewById(R.id.ChooseTimeId);
         shownDate = findViewById(R.id.ShownDateId);
         shownTime = findViewById(R.id.ShownTimeId);
+        addNoteButton = findViewById(R.id.addNoteButton);
         chooseDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +104,12 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View view) {
                 showTimePickerDialog();
+            }
+        });
+        addNoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTextDialog();
             }
         });
 
@@ -103,18 +124,30 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
             String price = "Price: " + mCurrentService.getPrice() + " lei";
             servicePrice.setText(price);
         } else servicePrice.setText("");
+        getAppointmentButton.setVisibility(View.GONE);
+
 
 
         getAppointmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Clicked appointment.", Toast.LENGTH_SHORT).show();
+
+                CollectionReference appointmentRef = FirebaseFirestore.getInstance().collection("appointments");
+                appointmentRef.add(new Appointment(FirebaseAuth.getInstance().getCurrentUser().getUid(), mCurrentProvider.getId(),mCurrentService.getId(),
+                        mAppointmentDay,mAppointmentMonth,mAppointmentYear,mAppointmentHour,mAppointmentMinute,mNote));
+
                 Intent intent = new Intent(ServiceActivity.this, AppointmentActivity.class);
                 startActivity(intent);
                 Log.d(TAG, "onClick: appointment");
             }
         });
 
+
+    }
+
+    public void openTextDialog(){
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.show(getSupportFragmentManager(),"TextInputDialog");
 
     }
 
@@ -188,6 +221,15 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
 
         String date = dayOfMonth + "/" + month + "/" + year;
         shownDate.setText(date);
+        mAppointmentDay = dayOfMonth;
+        mAppointmentMonth = month;
+        mAppointmentYear = year;
+
+        if(mAppointmentDay!=null && mAppointmentMonth!=null && mAppointmentYear!=null && mAppointmentHour!=null && mAppointmentMinute!=null){
+
+            getAppointmentButton.setVisibility(View.VISIBLE);
+
+        }
 
     }
 
@@ -203,5 +245,26 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         }
         String time = lHour + ":" + lMinute + " PM";
         shownTime.setText(time);
+
+        mAppointmentHour = hour;
+        mAppointmentMinute = minute;
+
+        if(mAppointmentDay!=null && mAppointmentMonth!=null && mAppointmentYear!=null && mAppointmentHour!=null && mAppointmentMinute!=null){
+
+            getAppointmentButton.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void applyText(String note) {
+        mNote = note;
+
+
     }
 }

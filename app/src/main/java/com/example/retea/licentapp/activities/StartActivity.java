@@ -28,6 +28,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static com.example.retea.licentapp.utils.Constants.ERROR_DIALOG_REQUEST;
 import static com.example.retea.licentapp.utils.Constants.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
@@ -37,7 +38,7 @@ public class StartActivity extends AppCompatActivity {
     private static final String TAG = "StartActivity";
 
     private boolean mLocationPermissionGranted = false;
-    private FusedLocationProviderClient mFusedLocationClient;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onResume() {
@@ -47,9 +48,9 @@ public class StartActivity extends AppCompatActivity {
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
-                startActivity(new Intent(this, DashboardActivity.class));
-//                onDestroy();
-                //ceva
+                if(mAuth.getCurrentUser() != null){
+                    startActivity(new Intent(this, DashboardActivity.class));
+                }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
             } else {
                 getLocationPermission();
             }
@@ -61,18 +62,8 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-//        if (checkMapServices()) {
-//            if (mLocationPermissionGranted) {
-//                getDeviceLocation();
-//                startActivity(new Intent(this,DashboardActivity.class));
-//                onDestroy();
-//                //ceva
-//            } else {
-//                getLocationPermission();
-//            }
-//        }
 
-
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -81,9 +72,9 @@ public class StartActivity extends AppCompatActivity {
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
-                startActivity(new Intent(this, DashboardActivity.class));
-//                onDestroy();
-                //ceva
+                if(mAuth.getCurrentUser() != null){
+                    startActivity(new Intent(this, DashboardActivity.class));
+                }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
             } else {
                 getLocationPermission();
             }
@@ -157,9 +148,9 @@ public class StartActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
             getDeviceLocation();
-            startActivity(new Intent(this, DashboardActivity.class));
-//            onDestroy();
-            //ceva
+            if(mAuth.getCurrentUser() != null){
+                startActivity(new Intent(this, DashboardActivity.class));
+            }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -211,9 +202,11 @@ public class StartActivity extends AppCompatActivity {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
                 if (mLocationPermissionGranted) {
                     getDeviceLocation();
-                    startActivity(new Intent(this, DashboardActivity.class));
-//                    onDestroy();
-                    //ceva
+                    if(mAuth.getCurrentUser() != null){
+                        startActivity(new Intent(this, DashboardActivity.class));
+                    }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
+
+
                 } else {
                     getLocationPermission();
                 }

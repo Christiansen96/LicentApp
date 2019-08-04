@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.retea.licentapp.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
 import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
@@ -169,6 +171,12 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 startActivity(searchActivityIntent);
 
                 break;
+            case R.id.nav_logout:
+                Log.d(TAG, "onMenuItemClick: logged out");
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(this, "Successfully logged out!",Toast.LENGTH_SHORT).show();
+                Intent signOutActivityIntent = new Intent(this,AuthenticationMethodsActivity.class);
+                startActivity(signOutActivityIntent);
 
         }
     }

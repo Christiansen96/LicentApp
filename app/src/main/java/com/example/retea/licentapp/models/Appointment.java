@@ -4,69 +4,101 @@ import java.util.Date;
 
 public class Appointment {
 
-    private int id;
-    private int customerId;
-    private int providerId;
-    public int serviceId;
-    private Date begin;
-    private Date end;
-    public String notes;
+    private String id;
+    private String customerId;
+    private String providerId;
+    private String serviceId;
+    private int day;
+    private int month;
+    private int year;
+    private int hour;
+    private int minute;
 
-    public Appointment(int id, int customerId, int providerId, int serviceId, Date begin, Date end) {
+    private String notes;
+
+    public Appointment(String customerId, String providerId, String serviceId, int day, int month, int year, int hour, int minute, String notes) {
         this.id = id;
         this.customerId = customerId;
         this.providerId = providerId;
         this.serviceId = serviceId;
-        this.begin = begin;
-        this.end = end;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
+        this.minute = minute;
+        this.notes = notes;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public int getProviderId() {
+    public String getProviderId() {
         return providerId;
     }
 
-    public void setProviderId(int providerId) {
+    public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
 
-    public int getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
     }
 
-    public Date getBegin() {
-        return begin;
+    public int getDay() {
+        return day;
     }
 
-    public void setBegin(Date begin) {
-        this.begin = begin;
+    public void setDay(int day) {
+        this.day = day;
     }
 
-    public Date getEnd() {
-        return end;
+    public int getMonth() {
+        return month;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
     }
 
     public String getNotes() {

@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="6dp"
         android:elegantTextHeight="true"
         android:text="@string/service_mock_description"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="100"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
         <TextView
             android:id="@+id/OpenedServicePriceId"
             android:layout_width="0dp"
@@ -98,12 +98,18 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="4dp"/>
+        <Button
+            android:id="@+id/addNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Add a note"/>
 
         <Button
             android:id="@+id/OpenedServiceGetAppointmentButtonId"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             android:gravity="center"
             android:text="Make appointment!"
             android:padding="4dp"/>

@@ -18,6 +18,7 @@ package com.example.retea.licentapp.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,11 +32,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retea.licentapp.R;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class EmailAndPasswordAuthenticationActivity extends AppCompatActivity implements
@@ -139,6 +142,9 @@ public class EmailAndPasswordAuthenticationActivity extends AppCompatActivity im
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Toast.makeText(EmailAndPasswordAuthenticationActivity.this, "Authentication succsesful. Welcome back!",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(EmailAndPasswordAuthenticationActivity.this, DashboardActivity.class));
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

@@ -1,7 +1,5 @@
 package com.example.retea.licentapp.models;
 
-import android.app.Application;
-
 public class User {
     private static final String TAG = "User";
 
@@ -15,6 +13,8 @@ public class User {
         }
         return userInstance;
     }
+
+
 
     private User() {
 
