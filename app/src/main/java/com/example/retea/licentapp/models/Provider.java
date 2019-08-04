@@ -3,6 +3,7 @@ package com.example.retea.licentapp.models;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Provider {
@@ -74,7 +75,8 @@ public class Provider {
     }
 
     public void setServiceList(List<Service> serviceList) {
-        this.serviceList = serviceList;
+        this.serviceList = new ArrayList<>();
+        this.serviceList.addAll(serviceList);
     }
 
     public int getIcon() {
@@ -102,7 +104,7 @@ public class Provider {
     }
 
     public String toString() {
-        return name + " " + category + " " + geologicalPosition.getLatitude() + " " + geologicalPosition.getLongitude();
+        return name + " " + category + " " + geologicalPosition.getLatitude() + " " + geologicalPosition.getLongitude() + type;
     }
 }
 

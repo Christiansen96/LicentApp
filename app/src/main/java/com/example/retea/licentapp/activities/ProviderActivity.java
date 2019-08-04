@@ -100,14 +100,13 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
 
         if(mProviderType == PROVIDER_TYPE_HOME){
 
-            if (!intentId.equals("0")) {
                 for (Provider provider : LicentApplication.getHomeProvidersList()) {
                     if (intentId.equals(provider.getId())) {
                         mCurrentProvider = provider;
                         break;
                     }
                 }
-            }
+
 
 
             LatLng intentPosition = (LatLng) intent.getExtras().get("position");

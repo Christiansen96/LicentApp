@@ -34,7 +34,6 @@
                 android:maxLines="1"
                 android:text="La gicu"
                 android:layout_alignLeft="@id/OpenedProviderIconId"
-                android:layout_alignRight="@id/OpenedProviderIconId"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:textSize="20sp"/>
