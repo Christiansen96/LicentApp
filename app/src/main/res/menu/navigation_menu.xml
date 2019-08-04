@@ -7,31 +7,31 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="My Profile"></item>
+            android:title="@string/my_profile" />
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="Dashboard"></item>
+            android:title="@string/dashboard" />
         <item
             android:id="@+id/nav_home_providers"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home Providers"></item>
+            android:title="@string/home_providers" />
         <item
             android:id="@+id/nav_away_providers"
             android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="Away Providers"></item>
+            android:title="@string/away_providers" />
     </group>
 
-    <item android:title="Actions">
+    <item android:title="@string/actions">
         <menu>
             <item
                 android:id="@+id/nav_search"
                 android:icon="@drawable/ic_search_black_24dp"
-                android:title="Search"></item>
+                android:title="@string/search" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
-                android:title="Log out"/>
+                android:title="@string/log_out" />
         </menu>
     </item>
 </menu>

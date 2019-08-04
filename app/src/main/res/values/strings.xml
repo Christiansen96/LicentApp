@@ -105,4 +105,29 @@
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
+    <string name="email_and_password">Email and password</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="services_near">Services near</string>
+    <string name="home">Home</string>
+    <string name="home_card_description">Need an appointment for a service at your location?</string>
+    <string name="away">Away</string>
+    <string name="away_card_description">Need an appointment for a service at their location?</string>
+    <string name="login_activity">Login Activity</string>
+    <string name="price">Price:</string>
+    <string name="duration">Duration:</string>
+    <string name="pick_a_date_and_time">Pick a date and time!</string>
+    <string name="choose_date">Choose date</string>
+    <string name="choose_time">Choose time</string>
+    <string name="add_a_note">Add a note</string>
+    <string name="make_appointment">Make appointment!</string>
+    <string name="get_an_appointment">Get an appointment!</string>
+    <string name="write_your_notes_here">Write your notes here!</string>
+    <string name="my_profile">My Profile</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="home_providers">Home Providers</string>
+    <string name="away_providers">Away Providers</string>
+    <string name="actions">Actions</string>
+    <string name="search">Search</string>
+    <string name="log_out">Log out</string>
 </resources>

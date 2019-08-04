@@ -21,14 +21,11 @@ import com.example.retea.licentapp.fragments.TextInputDialog;
 import com.example.retea.licentapp.models.Appointment;
 import com.example.retea.licentapp.models.Provider;
 import com.example.retea.licentapp.models.Service;
-import com.example.retea.licentapp.models.User;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.time.Clock;
 import java.util.Calendar;
 
 import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
@@ -127,14 +124,13 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         getAppointmentButton.setVisibility(View.GONE);
 
 
-
         getAppointmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 CollectionReference appointmentRef = FirebaseFirestore.getInstance().collection("appointments");
-                appointmentRef.add(new Appointment(FirebaseAuth.getInstance().getCurrentUser().getUid(), mCurrentProvider.getId(),mCurrentService.getId(),
-                        mAppointmentDay,mAppointmentMonth,mAppointmentYear,mAppointmentHour,mAppointmentMinute,mNote));
+                appointmentRef.add(new Appointment(FirebaseAuth.getInstance().getCurrentUser().getUid(), mCurrentProvider.getId(), mCurrentService.getId(),
+                        mAppointmentDay, mAppointmentMonth, mAppointmentYear, mAppointmentHour, mAppointmentMinute, mNote,false));
 
                 Intent intent = new Intent(ServiceActivity.this, AppointmentActivity.class);
                 startActivity(intent);
@@ -145,9 +141,9 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
 
     }
 
-    public void openTextDialog(){
+    public void openTextDialog() {
         TextInputDialog textInputDialog = new TextInputDialog();
-        textInputDialog.show(getSupportFragmentManager(),"TextInputDialog");
+        textInputDialog.show(getSupportFragmentManager(), "TextInputDialog");
 
     }
 
@@ -155,7 +151,7 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
 
         mProviderType = intent.getExtras().getInt("providersType");
 
-        String providerId =(String) intent.getExtras().get("providerId");
+        String providerId = (String) intent.getExtras().get("providerId");
         Log.d(TAG, "onCreate: id " + providerId);
 
         if (mProviderType == PROVIDER_TYPE_HOME) {
@@ -183,7 +179,7 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         if (mCurrentProvider != null) {
             if (!serviceId.equals("0")) {
                 for (Service service : mCurrentProvider.getServiceList()) {
-                    if (serviceId.equals(service.getId())){
+                    if (serviceId.equals(service.getId())) {
                         mCurrentService = service;
                     }
                 }
@@ -225,7 +221,7 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         mAppointmentMonth = month;
         mAppointmentYear = year;
 
-        if(mAppointmentDay!=null && mAppointmentMonth!=null && mAppointmentYear!=null && mAppointmentHour!=null && mAppointmentMinute!=null){
+        if (mAppointmentHour != null && mAppointmentMinute != null) {
 
             getAppointmentButton.setVisibility(View.VISIBLE);
 
@@ -235,12 +231,12 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        String lMinute =  String.valueOf(minute);
-        if(minute<10){
+        String lMinute = String.valueOf(minute);
+        if (minute < 10) {
             lMinute = "0" + minute;
         }
-        String lHour =  String.valueOf(hour);
-        if(hour<10){
+        String lHour = String.valueOf(hour);
+        if (hour < 10) {
             lHour = "0" + hour;
         }
         String time = lHour + ":" + lMinute + " PM";
@@ -249,7 +245,7 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
         mAppointmentHour = hour;
         mAppointmentMinute = minute;
 
-        if(mAppointmentDay!=null && mAppointmentMonth!=null && mAppointmentYear!=null && mAppointmentHour!=null && mAppointmentMinute!=null){
+        if (mAppointmentDay != null && mAppointmentMonth != null && mAppointmentYear != null) {
 
             getAppointmentButton.setVisibility(View.VISIBLE);
 

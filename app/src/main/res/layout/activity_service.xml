@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorDarkTurq">
 
     <TextView
         android:id="@+id/OpenedServiceNameId"
@@ -11,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:maxLines="2"
-        android:text="Serviciul1"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -31,88 +31,102 @@
         android:elegantTextHeight="true"
         android:text="@string/service_mock_description"
         android:textSize="16sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="100"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:weightSum="100">
+
         <TextView
             android:id="@+id/OpenedServicePriceId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_weight="50"
             android:gravity="start"
-            android:layout_marginStart="10dp"
+            android:text="@string/price"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Price: "/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/OpenedServiceDurationId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:layout_weight="50"
             android:gravity="end"
-            android:text="Duration: "
+            android:text="@string/duration"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginEnd="10dp"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
             android:padding="4dp"
-            android:text="Pick a date and time!"
-            android:textColor="#000"/>
+            android:text="@string/pick_a_date_and_time"
+            android:textColor="#000"
+            android:textSize="30sp" />
+
         <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:theme="@style/ThemeOverlay.MyDarkButton"
             android:id="@+id/ChooseDateId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose date"
-            android:padding="4dp"/>
+            android:padding="4dp"
+            android:text="@string/choose_date" />
 
         <TextView
             android:id="@+id/ShownDateId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="4dp"/>
+            android:padding="4dp"
+            android:textSize="20sp" />
+
         <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:theme="@style/ThemeOverlay.MyDarkButton"
             android:id="@+id/ChooseTimeId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose time"
-            android:padding="4dp"/>
+            android:padding="4dp"
+            android:text="@string/choose_time" />
+
         <TextView
             android:id="@+id/ShownTimeId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="4dp"/>
+            android:padding="4dp"
+            android:textSize="20sp" />
+
         <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:theme="@style/ThemeOverlay.MyDarkButton"
             android:id="@+id/addNoteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Add a note"/>
+            android:text="@string/add_a_note" />
 
         <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:theme="@style/ThemeOverlay.MyDarkButton"
             android:id="@+id/OpenedServiceGetAppointmentButtonId"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_margin="4dp"
             android:gravity="center"
-            android:text="Make appointment!"
-            android:padding="4dp"/>
+            android:padding="4dp"
+            android:text="@string/make_appointment" />
 
     </LinearLayout>
 

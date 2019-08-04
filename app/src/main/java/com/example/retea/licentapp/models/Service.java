@@ -34,7 +34,6 @@ public class Service {
         this.providerId = providerId;
 
 
-
     }
 
     public String getShortDescription() {
@@ -102,6 +101,6 @@ public class Service {
     }
 
     public String toString() {
-        return String.valueOf(id) + " " + name + " " + String.valueOf(price) + " " + String.valueOf(duration) + " " + shortDescription + " " + longDescription;
+        return id + " " + name + " " + price + " " + duration + " " + shortDescription + " " + longDescription;
     }
 }

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.DashboardActivity">
+    tools:context=".activities.DashboardActivity"
+    android:background="@color/colorDarkTurq">
 
     <TextView
         android:id="@+id/servicesNearId"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:text="Services near"
+        android:text="@string/services_near"
         android:textSize="20sp" />
 
     <TextView
@@ -21,127 +22,131 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Str. Doamna Ghica 6"
         android:gravity="center"
         android:textSize="25sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardElevation="6dp"
         android:layout_marginTop="35dp"
-        app:cardBackgroundColor="@color/cardview_shadow_start_color">
-    <LinearLayout
-        android:id="@+id/HomeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:clickable="true">
+        app:cardBackgroundColor="@color/colorDarkBlue"
+        app:cardElevation="6dp">
 
-        <ImageView
-            android:id="@+id/HomeImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_home_black_24dp" />
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/common_google_signin_btn_text_dark_disabled"
-            android:elevation="10dp" />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/HomeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:focusable="true">
 
-            <TextView
+            <ImageView
+                android:id="@+id/HomeImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_home_black_24dp" />
 
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/common_google_signin_btn_text_dark_disabled"
+                android:elevation="10dp" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="Home"
-                android:textSize="24sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="Need an appointment for a service at your location?"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/home"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/home_card_description"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
-
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/colorDarkBlue"
         app:cardElevation="6dp"
-        app:cardBackgroundColor="@color/cardview_shadow_start_color">
-
-    <LinearLayout
-        android:id="@+id/AwayLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal"
-        android:clickable="true">
-
-        <ImageView
-            android:id="@+id/AwayImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_directions_run_black_24dp" />
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/common_google_signin_btn_text_dark_disabled"
-            android:elevation="10dp"></View>
+        tools:ignore="PrivateResource">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/AwayLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <TextView
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/AwayImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_directions_run_black_24dp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/common_google_signin_btn_text_dark_disabled"
+                android:elevation="10dp" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="Away"
-                android:textSize="24sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="Need an appointment for a service at their location?"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/away"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/away_card_description"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
-
-
-
-    </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
         android:id="@+id/goToLogin"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="Login Activity"/>
+        android:text="@string/login_activity" />
 
 </LinearLayout>

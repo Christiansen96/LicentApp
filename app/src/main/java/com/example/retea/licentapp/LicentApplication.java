@@ -50,7 +50,7 @@ public class LicentApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        
+
         FirestoreFunctions.downloadServices(new CallbackServiceDB() {
             @Override
             public void onSuccess(@NonNull List<Service> serviceList) {
@@ -59,12 +59,12 @@ public class LicentApplication extends Application {
                     @Override
                     public void onSuccess(@NonNull List<Provider> providerList) {
                         Log.d(TAG, "onSuccess: download providers: Got here");
-                        
-                        for(Provider provider : providerList){
-                            if(provider.getType() == PROVIDER_TYPE_HOME){
+
+                        for (Provider provider : providerList) {
+                            if (provider.getType() == PROVIDER_TYPE_HOME) {
                                 mHomeProviderList.add(provider);
                                 Log.d(TAG, "onSuccess: found home provider");
-                            } else if(provider.getType()==PROVIDER_TYPE_AWAY){
+                            } else if (provider.getType() == PROVIDER_TYPE_AWAY) {
                                 mAwayProviderList.add(provider);
                                 Log.d(TAG, "onSuccess: found away provider");
                             }
@@ -73,8 +73,6 @@ public class LicentApplication extends Application {
                 });
             }
         });
-
-
 
 
     }

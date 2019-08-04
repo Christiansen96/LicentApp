@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.retea.licentapp.R;
@@ -18,11 +19,12 @@ public class TextInputDialog extends AppCompatDialogFragment {
     private EditText editTextNote;
     private TextInputDialogListener listener;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.textinputdialog_layout,null);
+        View view = inflater.inflate(R.layout.textinputdialog_layout, null);
         editTextNote = view.findViewById(R.id.editTextNoteId);
         builder.setView(view)
                 .setTitle("Note")
@@ -50,13 +52,13 @@ public class TextInputDialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener =(TextInputDialogListener) context;
+            listener = (TextInputDialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "must implement TextInputDialogListener");
         }
     }
 
-    public interface TextInputDialogListener{
+    public interface TextInputDialogListener {
         void applyText(String note);
     }
 }

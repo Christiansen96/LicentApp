@@ -102,8 +102,6 @@ public class DashboardActivity extends BaseNavigationDrawer {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
         try {
-//            List<Address> addressList = geocoder.getFromLocation(LicentApplication.getInstance().getDeviceGeologicalPosition().getLatitude(),
-//                    LicentApplication.getInstance().getDeviceGeologicalPosition().getLongitude(), 1);
             List<Address> addressList = geocoder.getFromLocation(44.4628556,
                     26.1310713, 1);
             Log.d(TAG, "getDeviceAddress: list size is " + addressList.size());

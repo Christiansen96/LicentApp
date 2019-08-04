@@ -5,7 +5,7 @@
     android:layout_height="70dp"
     android:layout_margin="6dp"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/design_default_color_primary"
+    app:cardBackgroundColor="@color/colorDarkBlue"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp">
 
@@ -21,7 +21,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:src="@drawable/ic_directions_run_black_24dp"/>
+            android:src="@drawable/ic_directions_run_black_24dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -34,8 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/ProviderItemCategoryId"
@@ -53,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="20dp"
-            android:text="0.7km"
             android:textSize="20sp" />
     </LinearLayout>
 

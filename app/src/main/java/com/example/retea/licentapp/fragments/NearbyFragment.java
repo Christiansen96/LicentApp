@@ -89,9 +89,9 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
             mProvidersType = getArguments().getInt("providersType");
             Log.d(TAG, "onCreateView: " + mProvidersType);
         }
-        if (mProvidersType == PROVIDER_TYPE_HOME){
+        if (mProvidersType == PROVIDER_TYPE_HOME) {
             mProviderList = LicentApplication.getHomeProvidersList();
-        }else if(mProvidersType == PROVIDER_TYPE_AWAY){
+        } else if (mProvidersType == PROVIDER_TYPE_AWAY) {
             mProviderList = LicentApplication.getAwayProviderList();
         }
 
@@ -242,7 +242,7 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
     public void onItemClick(Provider provider) {
         Intent intent = new Intent(this.getContext(), ProviderActivity.class);
         intent.putExtra("providerId", provider.getId());
-        intent.putExtra("providersType",provider.getType());
+        intent.putExtra("providersType", provider.getType());
         startActivity(intent);
         Log.d(TAG, "onItemClick: " + provider.toString());
     }
@@ -303,8 +303,6 @@ public class NearbyFragment extends Fragment implements OnMapReadyCallback,
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
 
         try {
-//            List<Address> addressList = geocoder.getFromLocation(LicentApplication.getInstance().getDeviceGeologicalPosition().getLatitude(),
-//                    LicentApplication.getInstance().getDeviceGeologicalPosition().getLongitude(), 1);
             List<Address> addressList = geocoder.getFromLocation(geologicalPosition.getLatitude(),
                     geologicalPosition.getLongitude(), 1);
             String address = addressList.get(0).getAddressLine(0);

@@ -48,9 +48,9 @@ public class StartActivity extends AppCompatActivity {
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
-                if(mAuth.getCurrentUser() != null){
+                if (mAuth.getCurrentUser() != null) {
                     startActivity(new Intent(this, DashboardActivity.class));
-                }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
+                } else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
             } else {
                 getLocationPermission();
             }
@@ -72,9 +72,9 @@ public class StartActivity extends AppCompatActivity {
         if (checkMapServices()) {
             if (mLocationPermissionGranted) {
                 getDeviceLocation();
-                if(mAuth.getCurrentUser() != null){
+                if (mAuth.getCurrentUser() != null) {
                     startActivity(new Intent(this, DashboardActivity.class));
-                }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
+                } else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
             } else {
                 getLocationPermission();
             }
@@ -148,9 +148,9 @@ public class StartActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
             getDeviceLocation();
-            if(mAuth.getCurrentUser() != null){
+            if (mAuth.getCurrentUser() != null) {
                 startActivity(new Intent(this, DashboardActivity.class));
-            }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
+            } else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -202,9 +202,9 @@ public class StartActivity extends AppCompatActivity {
             case PERMISSIONS_REQUEST_ENABLE_GPS: {
                 if (mLocationPermissionGranted) {
                     getDeviceLocation();
-                    if(mAuth.getCurrentUser() != null){
+                    if (mAuth.getCurrentUser() != null) {
                         startActivity(new Intent(this, DashboardActivity.class));
-                    }else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
+                    } else startActivity(new Intent(this, AuthenticationMethodsActivity.class));
 
 
                 } else {

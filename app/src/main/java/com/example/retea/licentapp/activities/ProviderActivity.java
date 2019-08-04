@@ -95,18 +95,17 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
 
         mProviderType = intent.getExtras().getInt("providersType");
 
-        String intentId = (String)intent.getExtras().get("providerId");
+        String intentId = (String) intent.getExtras().get("providerId");
         Log.d(TAG, "onCreate: id " + intentId);
 
-        if(mProviderType == PROVIDER_TYPE_HOME){
+        if (mProviderType == PROVIDER_TYPE_HOME) {
 
-                for (Provider provider : LicentApplication.getHomeProvidersList()) {
-                    if (intentId.equals(provider.getId())) {
-                        mCurrentProvider = provider;
-                        break;
-                    }
+            for (Provider provider : LicentApplication.getHomeProvidersList()) {
+                if (intentId.equals(provider.getId())) {
+                    mCurrentProvider = provider;
+                    break;
                 }
-
+            }
 
 
             LatLng intentPosition = (LatLng) intent.getExtras().get("position");
@@ -120,7 +119,7 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
                 }
             }
 
-        }else if (mProviderType == PROVIDER_TYPE_AWAY){
+        } else if (mProviderType == PROVIDER_TYPE_AWAY) {
 
             if (!intentId.equals("0")) {
                 for (Provider provider : LicentApplication.getAwayProviderList()) {
@@ -156,7 +155,7 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
         Intent intent = new Intent(this, ServiceActivity.class);
         intent.putExtra("providerId", mCurrentProvider.getId());
         intent.putExtra("serviceId", service.getId());
-        intent.putExtra("providersType",mProviderType);
+        intent.putExtra("providersType", mProviderType);
         startActivity(intent);
         Log.d(TAG, "onItemClick: " + service.getName());
 

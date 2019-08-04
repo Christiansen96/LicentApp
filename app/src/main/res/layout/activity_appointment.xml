@@ -8,12 +8,5 @@
     android:orientation="vertical"
     tools:context=".activities.AppointmentActivity">
 
-<Button
-    android:id="@+id/addToFirestoreBtn"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:text="ADD"/>
 
 </LinearLayout>

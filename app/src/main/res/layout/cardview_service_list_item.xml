@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="160dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
     android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp"
     android:orientation="vertical"
     app:cardCornerRadius="10dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/colorDarkBlue">
 
     <LinearLayout
         android:id="@+id/ServiceItemLayoutId"
@@ -45,26 +46,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_gravity="bottom"
             android:layout_weight="15"
             android:orientation="horizontal"
-            android:weightSum="100"
-            android:layout_gravity="bottom">
+            android:weightSum="100">
 
             <TextView
                 android:id="@+id/ServiceItemDurationId"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
                 android:layout_marginStart="6dp"
-                android:gravity="start"/>
+                android:layout_weight="50"
+                android:gravity="start" />
 
             <TextView
                 android:id="@+id/ServiceItemPriceId"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="6dp"
                 android:layout_weight="50"
-                android:gravity="end"
-                android:layout_marginEnd="6dp"/>
+                android:gravity="end" />
 
         </LinearLayout>
     </LinearLayout>
