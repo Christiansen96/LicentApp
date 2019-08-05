@@ -7,19 +7,23 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/my_profile" />
+            android:title="@string/my_profile"
+            android:textColor="@color/white"/>
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/dashboard" />
+            android:title="@string/dashboard"
+            android:textColor="@color/white"/>
         <item
             android:id="@+id/nav_home_providers"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/home_providers" />
+            android:title="@string/home_providers"
+            android:textColor="#FFFFFF"/>
         <item
             android:id="@+id/nav_away_providers"
             android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="@string/away_providers" />
+            android:title="@string/away_providers"
+            android:textColor="@color/white"/>
     </group>
 
     <item android:title="@string/actions">
@@ -27,11 +31,13 @@
             <item
                 android:id="@+id/nav_search"
                 android:icon="@drawable/ic_search_black_24dp"
-                android:title="@string/search" />
+                android:title="@string/search"
+                android:textColor="@color/white"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
-                android:title="@string/log_out" />
+                android:title="@string/log_out"
+                android:textColor="@color/white"/>
         </menu>
     </item>
 </menu>
