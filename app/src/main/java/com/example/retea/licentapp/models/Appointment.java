@@ -14,13 +14,17 @@ public class Appointment {
     private int hour;
     private int minute;
     private boolean confirmed;
+    private String providerName;
+    private String serviceName;
 
     private String notes;
 
-    public Appointment(String customerId, String providerId, String serviceId, int day, int month, int year, int hour, int minute, String notes, boolean confirmed) {
+    public Appointment(String customerId, String providerId, String providerName, String serviceId, String serviceName, int day, int month, int year, int hour, int minute, String notes, boolean confirmed) {
         this.customerId = customerId;
         this.providerId = providerId;
+        this.providerName = providerName;
         this.serviceId = serviceId;
+        this.serviceName = serviceName;
         this.day = day;
         this.month = month;
         this.year = year;
@@ -28,6 +32,23 @@ public class Appointment {
         this.minute = minute;
         this.notes = notes;
         this.confirmed = confirmed;
+
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String provierName) {
+        this.providerName = provierName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     public boolean isConfirmed() {

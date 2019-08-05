@@ -6,7 +6,10 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.AppointmentActivity">
+    tools:context=".activities.AppointmentActivity"
+    android:background="@color/colorDarkTurq">
+
+
 
 
 </LinearLayout>

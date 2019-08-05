@@ -6,5 +6,9 @@
     <color name="colorDarkBlue">#6c7b95</color>
     <color name="colorDarkPurple">#464159</color>
     <color name="white">#D7D7D7</color>
+    <color name="solidCircle">#80FFFFFF</color>
+    <color name="circleBorder">#30FFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
 
 </resources>

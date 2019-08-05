@@ -55,6 +55,8 @@ public class LicentApplication extends Application {
             @Override
             public void onSuccess(@NonNull List<Service> serviceList) {
                 Log.d(TAG, "onSuccess: download services: Got here");
+                mServiceList.clear();
+                mServiceList.addAll(serviceList);
                 FirestoreFunctions.downloadProviders(serviceList, new CallbackProviderDB() {
                     @Override
                     public void onSuccess(@NonNull List<Provider> providerList) {
@@ -84,6 +86,10 @@ public class LicentApplication extends Application {
 
     public static List<Provider> getAwayProviderList() {
         return mAwayProviderList;
+    }
+
+    public static List<Service> getServiceList(){
+        return mServiceList;
     }
 
 
