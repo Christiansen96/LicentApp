@@ -35,6 +35,8 @@ public class Appointment {
 
     }
 
+
+
     public String getProviderName() {
         return providerName;
     }

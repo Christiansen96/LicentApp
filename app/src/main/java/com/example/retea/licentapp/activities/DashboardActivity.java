@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.retea.licentapp.LicentApplication;
+import androidx.annotation.NonNull;
+
 import com.example.retea.licentapp.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +53,7 @@ public class DashboardActivity extends BaseNavigationDrawer {
             }
         });
 
-        getDeviceAddress();
+        getAddresFromLocation();
 
         HomeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +103,13 @@ public class DashboardActivity extends BaseNavigationDrawer {
         return R.id.nav_dashboard;
     }
 
-    private void getDeviceAddress() {
+    private void getDeviceAddress(Location location) {
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
         try {
-            List<Address> addressList = geocoder.getFromLocation(44.4628556,
-                    26.1310713, 1);
+            List<Address> addressList = geocoder.getFromLocation(location.getLatitude(),
+                    location.getLongitude(), 1);
             Log.d(TAG, "getDeviceAddress: list size is " + addressList.size());
             String address = addressList.get(0).getAddressLine(0);
             Log.d(TAG, "getDeviceAddress: " + address);
@@ -113,6 +119,45 @@ public class DashboardActivity extends BaseNavigationDrawer {
         }
 
 
+    }
+
+    private void getAddresFromLocation(){
+
+        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(DashboardActivity.this);
+
+        try{
+
+            Task location = fusedLocationProviderClient.getLastLocation();
+            location.addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+
+                    if(task.isSuccessful()){
+                        Log.d(TAG, "onComplete: found location");
+                        Location currentLocation = (Location) task.getResult();
+                        Geocoder geocoder = new Geocoder(DashboardActivity.this, Locale.getDefault());
+
+                        try {
+                            List<Address> addressList = geocoder.getFromLocation(currentLocation.getLatitude(),
+                                    currentLocation.getLongitude(), 1);
+                            Log.d(TAG, "getDeviceAddress: list size is " + addressList.size());
+                            String address = addressList.get(0).getAddressLine(0);
+                            Log.d(TAG, "getDeviceAddress: " + address);
+                            AddressTextView.setText(address);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }else{
+                        Log.d(TAG, "onComplete: current location is null");
+                        Toast.makeText(DashboardActivity.this,"unable to get current location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }catch (SecurityException e){
+            Log.e(TAG, "getLocation: " + e.getMessage());
+        }
     }
 
 

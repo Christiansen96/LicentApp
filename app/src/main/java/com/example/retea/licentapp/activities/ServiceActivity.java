@@ -253,11 +253,6 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
-    @Override
     public void applyText(String note) {
         mNote = note;
 

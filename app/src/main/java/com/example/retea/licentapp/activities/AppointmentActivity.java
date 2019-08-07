@@ -6,12 +6,17 @@ import com.example.retea.licentapp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class AppointmentActivity extends AppCompatActivity {
+public class AppointmentActivity extends BaseNavigationDrawer {
     private static final String TAG = "AppointmentActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
+    }
+
+    @Override
+    protected int getNavigationItemId() {
+        return 5;
     }
 }
 

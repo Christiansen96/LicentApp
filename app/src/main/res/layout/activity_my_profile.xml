@@ -3,23 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MyProfileActivity"
+    android:background="@drawable/grad"
     android:orientation="vertical"
-    android:background="@drawable/grad">
-
+    tools:context=".activities.MyProfileActivity">
 
 
     <RelativeLayout
-        android:id="@+id/rellay1"
-        android:layout_marginTop="0dp"
+        android:id="@+id/ProfileRelativeLayoutTopId"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
 
 
         <RelativeLayout
-            android:id="@+id/rellay2"
+            android:id="@+id/ProfileRelativeLayoutPictureId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -27,7 +26,7 @@
             android:background="@drawable/circle_border">
 
             <ImageView
-                android:id="@+id/profile"
+                android:id="@+id/ProfilePictureId"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="9dp"
@@ -39,62 +38,64 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="42dp"
-            android:orientation="horizontal">
-
-        </LinearLayout>
         <TextView
-            android:id="@+id/nume"
+            android:id="@+id/ProfileNameId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="150dp"
             android:gravity="center_horizontal"
-            android:text="Retea Cristian"
-            android:textColor="#ffffff"
+            android:text="@string/profile_name"
+            android:textColor="@color/white"
             android:textSize="25sp"
+            android:textStyle="italic" />
+        <TextView
+            android:id="@+id/ProfileMailId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp"
+            android:gravity="center_horizontal"
+            android:text="@string/email"
+            android:textColor="@color/white"
+            android:textSize="15sp"
             android:textStyle="italic" />
 
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/linlay1"
+        android:id="@+id/ProfileLinearLayoutTopId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ProfileRelativeLayoutTopId"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/rellay1"
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:id="@+id/rellay3"
-            android:layout_width="match_parent"
+            android:id="@+id/ProfileRelativeLayoutMiddleId"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <LinearLayout
-                android:id="@+id/linlay2"
+                android:id="@+id/ProfileLinearLayoutMiddleId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/MA"
-                    android:gravity="center"
-                    android:text="Appointments awaiting confirmation"
-                    android:layout_height="50dp"
+                    android:id="@+id/AppointmentsAwaitingConfirmationId"
                     android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="@string/ongoing_appointments"
                     android:textColor="@color/white"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewOngoingAppointments"
@@ -102,18 +103,28 @@
                     android:layout_height="100dp" />
 
                 <TextView
-                    android:id="@+id/MF"
-                    android:gravity="center"
-                    android:text="Ongoing appointments"
-                    android:layout_height="50dp"
+                    android:id="@+id/AppointmentsDone"
                     android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="@string/appointments_awaiting_confirmation"
                     android:textColor="@color/white"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewAwaitingAppointments"
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />
+
+                <Button
+                    android:padding="20dp"
+                    android:id="@+id/GoToSettingsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:text="@string/settings"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ThemeOverlay.MyDarkButton"/>
 
             </LinearLayout>
         </RelativeLayout>

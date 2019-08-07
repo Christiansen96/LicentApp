@@ -50,20 +50,20 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
 
         int minute = appointment.getMinute();
         int hour = appointment.getHour();
+        Log.d(TAG, "onBindViewHolder: "+ minute + " " + hour);
         String lMinute = "";
         String lHour = "";
         if (minute < 10) {
             lMinute = "0" + minute;
-        }
-        if (hour < 10) {
+            Log.d(TAG, "onBindViewHolder: " + lMinute);
+        }else lMinute = String.valueOf(minute);
+        if (hour < 10){
             lHour = "0" + hour;
-        }
-        String time = lHour + ":" + lMinute + " PM";
+        } else lHour = String.valueOf(hour);
+        String time = lHour +":" + lMinute + " PM";
 
-        String topText = "Appointment at '" + appointment.getProviderName() + "' for:";
-        holder.appointmentItemTopText.setText(topText);
-        String bottomText = "service: '" + appointment.getServiceName() + "'";
-        holder.appointmentItemBottomText.setText(bottomText);
+        String leftText = "Appointment at '" + appointment.getProviderName() + "' for service: '" + appointment.getServiceName() +"'";
+        holder.appointmentItemLeftText.setText(leftText);
         String date = appointment.getDay() + "/" + appointment.getMonth() + "/" + appointment.getYear();
         holder.appointmentItemDate.setText(date);
         holder.appointmentItemHour.setText(time);
@@ -87,8 +87,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
     static class MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout appointmentItemLinearLaoyout;
         ImageView appointmentItemIcon;
-        TextView appointmentItemTopText;
-        TextView appointmentItemBottomText;
+        TextView appointmentItemLeftText;
         TextView appointmentItemDate;
         TextView appointmentItemHour;
 
@@ -96,8 +95,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentList
             super(itemView);
             appointmentItemLinearLaoyout = itemView.findViewById(R.id.AppointmentItemLayoutId);
             appointmentItemIcon = itemView.findViewById(R.id.AppointmentIconId);
-            appointmentItemTopText = itemView.findViewById(R.id.AppointmentItemTopId);
-            appointmentItemBottomText = itemView.findViewById(R.id.AppointmentItemBottomId);
+            appointmentItemLeftText = itemView.findViewById(R.id.AppointmentItemLeftId);
             appointmentItemHour = itemView.findViewById(R.id.AppointmentItemHourId);
             appointmentItemDate = itemView.findViewById(R.id.AppointmentItemDateId);
 

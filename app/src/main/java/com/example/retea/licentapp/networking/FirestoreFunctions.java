@@ -6,15 +6,20 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.retea.licentapp.interfaces.CallbackAppointmentDB;
 import com.example.retea.licentapp.interfaces.CallbackProviderDB;
 import com.example.retea.licentapp.interfaces.CallbackServiceDB;
+import com.example.retea.licentapp.interfaces.CallbackUserDB;
+import com.example.retea.licentapp.models.Appointment;
 import com.example.retea.licentapp.models.GeologicalPosition;
 import com.example.retea.licentapp.models.Provider;
 import com.example.retea.licentapp.models.Service;
+import com.example.retea.licentapp.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
@@ -35,6 +40,9 @@ public class FirestoreFunctions {
     private static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     private static CollectionReference providerRef = firebaseFirestore.collection("providers");
     private static CollectionReference serviceRef = firebaseFirestore.collection("services");
+    private static CollectionReference appointmentRef = firebaseFirestore.collection("appointments");
+    private static CollectionReference userRef = firebaseFirestore.collection("users");
+    
 
     public static void downloadServices(final CallbackServiceDB callbackServiceDB) {
 
@@ -97,6 +105,91 @@ public class FirestoreFunctions {
         });
 
     }
+
+
+    public static void downloadAppointments(final CallbackAppointmentDB callbackAppointmentDB) {
+
+        appointmentRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Appointment> appointments = new ArrayList<>();
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        String customerId = (String) documentSnapshot.get("customerId");
+                        if (customerId.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+
+                            String providerId = (String) documentSnapshot.get("providerId");
+                            String providerName = (String) documentSnapshot.get("providerName");
+                            String serviceId = (String) documentSnapshot.get("serviceId");
+                            String serviceName = (String) documentSnapshot.get("serviceName");
+                            int day = Integer.parseInt(String.valueOf(documentSnapshot.get("day")));
+                            int month = Integer.parseInt(String.valueOf(documentSnapshot.get("month")));
+                            int year = Integer.parseInt(String.valueOf(documentSnapshot.get("year")));
+                            int hour = Integer.parseInt(String.valueOf(documentSnapshot.get("hour")));
+                            int minute = Integer.parseInt(String.valueOf(documentSnapshot.get("minute")));
+                            String notes = (String) documentSnapshot.get("notes");
+                            boolean confirmed = (boolean) documentSnapshot.get("confirmed");
+                            Log.d(TAG, "onComplete: found " +confirmed + "appointment");
+
+
+                            Appointment appointment = new Appointment(customerId, providerId, providerName, serviceId, serviceName, day, month, year, hour, minute, notes, confirmed);
+                            appointment.setId(documentSnapshot.getId());
+                            appointments.add(appointment);
+                            Log.d(TAG, "onSuccess: " + appointment.toString());
+                        }
+                    }
+                    callbackAppointmentDB.onSuccess(appointments);
+                }
+            }
+        });
+
+
+    }
+
+    public static void getUserFromDB(final CallbackUserDB callbackUserDB) {
+
+        userRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                        User user = new User();
+                        if(documentSnapshot.get("uid").equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                            Log.d(TAG, "onComplete: FOUND A USER MATCHING ID WITH CURRENT DEVICE");
+                            String name = (String) documentSnapshot.get("name");
+                            String imageUri = (String) documentSnapshot.get("pictureUri");
+                            String phoneNumber = (String) documentSnapshot.get("phoneNumber");
+                            String address = (String) documentSnapshot.get("address");
+                            String uid = (String) documentSnapshot.get("uid");
+
+                            if(uid!=null){
+                                user.setUid(uid);
+                            }
+                            
+                            if(name!=null){
+                                user.setName(name);
+                            }
+                            if(imageUri!=null){
+                                user.setPictureUri(imageUri);
+                            }
+                            if(phoneNumber!=null){
+                                user.setPhoneNumber(phoneNumber);
+                            }
+                            if(address!=null){
+                                user.setAddress(address);
+                            }
+                            Log.d(TAG, "onSuccess: " + user.toString());
+                        }
+                        callbackUserDB.onSuccess(user);
+                        
+                    }
+                }
+            }
+        });
+
+    }
+
 
 
 }

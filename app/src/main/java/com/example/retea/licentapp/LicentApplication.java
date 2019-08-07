@@ -5,11 +5,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.retea.licentapp.interfaces.CallbackAppointmentDB;
 import com.example.retea.licentapp.interfaces.CallbackProviderDB;
 import com.example.retea.licentapp.interfaces.CallbackServiceDB;
+import com.example.retea.licentapp.interfaces.CallbackUserDB;
+import com.example.retea.licentapp.models.Appointment;
 import com.example.retea.licentapp.models.GeologicalPosition;
 import com.example.retea.licentapp.models.Provider;
 import com.example.retea.licentapp.models.Service;
+import com.example.retea.licentapp.models.User;
 import com.example.retea.licentapp.networking.FirestoreFunctions;
 
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class LicentApplication extends Application {
     private static List<Provider> mHomeProviderList = new ArrayList<>();
     private static List<Provider> mAwayProviderList = new ArrayList<>();
     private static List<Service> mServiceList = new ArrayList<>();
+    private static List<Appointment> mAppointmentList = new ArrayList<>();
+    private static User mCurrentUser;
 
 
     public static LicentApplication getInstance() {
@@ -76,8 +82,26 @@ public class LicentApplication extends Application {
             }
         });
 
+        FirestoreFunctions.downloadAppointments(new CallbackAppointmentDB() {
+            @Override
+            public void onSuccess(@NonNull List<Appointment> appointmentList) {
+
+                mAppointmentList.clear();
+                mAppointmentList.addAll(appointmentList);
+
+            }
+        });
+
+        FirestoreFunctions.getUserFromDB(new CallbackUserDB() {
+            @Override
+            public void onSuccess(@NonNull User user) {
+                mCurrentUser = user;
+            }
+        });
+
 
     }
+
 
 
     public static List<Provider> getHomeProvidersList() {
@@ -91,6 +115,14 @@ public class LicentApplication extends Application {
     public static List<Service> getServiceList(){
         return mServiceList;
     }
+
+    public static List<Appointment> getAppointmentList(){
+        return mAppointmentList;
+    }
+    public static User getCurrentUser(){
+        return mCurrentUser;
+    }
+
 
 
 }
