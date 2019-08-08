@@ -132,9 +132,8 @@ public class ServiceActivity extends AppCompatActivity implements DatePickerDial
                 appointmentRef.add(new Appointment(FirebaseAuth.getInstance().getCurrentUser().getUid(), mCurrentProvider.getId(), mCurrentProvider.getName(),
                         mCurrentService.getId(), mCurrentService.getName(), mAppointmentDay, mAppointmentMonth, mAppointmentYear, mAppointmentHour, mAppointmentMinute, mNote, false));
 
-                Intent intent = new Intent(ServiceActivity.this, AppointmentActivity.class);
+                Intent intent = new Intent(ServiceActivity.this, MyProfileActivity.class);
                 startActivity(intent);
-                Log.d(TAG, "onClick: appointment");
             }
         });
 

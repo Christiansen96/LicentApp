@@ -139,12 +139,14 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 Log.d(TAG, "onMenuItemClick:  open dashboard activity");
                 Intent dashboardActivityIntent = new Intent(this,DashboardActivity.class);
                 startActivity(dashboardActivityIntent);
+                finish();
 
                 break;
             case R.id.nav_profile:
                 Log.d(TAG, "onMenuItemClick:  open profile activity");
                 Intent myProfileActivityIntent = new Intent(this,MyProfileActivity.class);
                 startActivity(myProfileActivityIntent);
+                finish();
 
                 break;
             case R.id.nav_home_providers:
@@ -153,6 +155,7 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 homeProvidersActivityIntent.putExtra("providersType",PROVIDER_TYPE_HOME);
                 homeProvidersActivityIntent.putExtra("tab",1);
                 startActivity(homeProvidersActivityIntent);
+                finish();
 
                 break;
             case R.id.nav_away_providers:
@@ -161,6 +164,7 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 awayProvidersActivityIntent.putExtra("providersType",PROVIDER_TYPE_AWAY);
                 awayProvidersActivityIntent.putExtra("tab",1);
                 startActivity(awayProvidersActivityIntent);
+                finish();
 
                 break;
             case R.id.nav_search:
@@ -177,7 +181,15 @@ public abstract class BaseNavigationDrawer extends AppCompatActivity implements 
                 Toast.makeText(this, "Successfully logged out!",Toast.LENGTH_SHORT).show();
                 Intent signOutActivityIntent = new Intent(this,AuthenticationMethodsActivity.class);
                 startActivity(signOutActivityIntent);
-
+                break;
+            case R.id.nav_settings:
+                Log.d(TAG, "onMenuItemClick: logged out");
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(this, "Gone to settings!",Toast.LENGTH_SHORT).show();
+                Intent settingsIntent = new Intent(this,SettingsActivity.class);
+                startActivity(settingsIntent);
+                finish();
+                break;
         }
     }
     protected abstract int getNavigationItemId();

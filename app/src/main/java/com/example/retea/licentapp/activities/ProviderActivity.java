@@ -25,7 +25,7 @@ import java.util.List;
 import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_AWAY;
 import static com.example.retea.licentapp.utils.Constants.PROVIDER_TYPE_HOME;
 
-public class ProviderActivity extends AppCompatActivity implements ServiceListAdapter.OnItemClickListener {
+public class ProviderActivity extends BaseNavigationDrawer implements ServiceListAdapter.OnItemClickListener {
     private static final String TAG = "ProviderActivity";
 
     private ImageView mCurrentProviderImage;
@@ -89,6 +89,11 @@ public class ProviderActivity extends AppCompatActivity implements ServiceListAd
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected int getNavigationItemId() {
+        return 12;
     }
 
     private void checkIntentForProviderInfo(Intent intent) {

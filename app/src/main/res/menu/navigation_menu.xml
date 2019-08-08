@@ -38,6 +38,11 @@
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="@string/log_out"
                 android:textColor="@color/white"/>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/log_out"
+                android:textColor="@color/white"/>
         </menu>
     </item>
 </menu>

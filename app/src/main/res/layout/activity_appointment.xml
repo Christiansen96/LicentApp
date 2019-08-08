@@ -9,6 +9,14 @@
     tools:context=".activities.AppointmentActivity"
     android:background="@color/colorDarkTurq">
 
+    <TextView
+        android:id="@+id/confirmedTextViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        />
+
 
 
 

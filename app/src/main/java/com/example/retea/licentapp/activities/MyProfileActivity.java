@@ -117,6 +117,7 @@ public class MyProfileActivity extends BaseNavigationDrawer implements Appointme
     public void onItemClick(Appointment appointment) {
 
         Intent intent = new Intent(this, AppointmentActivity.class);
+        intent.putExtra("appointmentId", appointment.getId());
         startActivity(intent);
 
     }

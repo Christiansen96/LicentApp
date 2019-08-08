@@ -145,6 +145,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private void startPickImageIntent() {
         Intent gallery = new Intent(Intent.ACTION_PICK, EXTERNAL_CONTENT_URI);
         startActivityForResult(gallery, SELECT_FILE);
