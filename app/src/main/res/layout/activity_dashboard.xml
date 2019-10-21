@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.DashboardActivity"
+    android:background="@color/colorDarkTurq">
+
+    <TextView
+        android:id="@+id/servicesNearId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="@string/services_near"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/AddressTextViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="25sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:cardBackgroundColor="@color/colorDarkBlue"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:id="@+id/HomeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/HomeImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_home_black_24dp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/common_google_signin_btn_text_dark_disabled"
+                android:elevation="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/home"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/home_card_description"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@color/colorDarkBlue"
+        app:cardElevation="6dp"
+        tools:ignore="PrivateResource">
+
+        <LinearLayout
+            android:id="@+id/AwayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/AwayImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_directions_run_black_24dp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/common_google_signin_btn_text_dark_disabled"
+                android:elevation="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/away"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/away_card_description"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:id="@+id/goToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="@string/login_activity" />
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.AuthenticationMethodsActivity"
+    android:background="@color/colorDarkTurq">
+
+    <Button
+        android:id="@+id/EmailAndPasswordLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:elevation="8dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:text="@string/email_and_password" />
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:id="@+id/FacebookLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:elevation="8dp"
+        android:text="@string/facebook" />
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:id="@+id/GoogleLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:elevation="8dp"
+        android:text="@string/google" />
+
+
+</LinearLayout>
